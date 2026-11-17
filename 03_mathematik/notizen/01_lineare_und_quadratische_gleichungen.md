@@ -57,3 +57,35 @@ Auf beiden Seiten immer dasselbe tun.
 3. `3x² + 5x − 2 = 0`
 4. Wie viele Lösungen haben `x² − 6x + 9 = 0` und `x² + 2x + 5 = 0`? Begründe mit D.
 5. Ein Rechteck hat den Umfang 34 cm und die Fläche 60 cm². Wie lang sind die Seiten?
+
+---
+
+## Satz von Vieta
+
+Für `x² + px + q = 0` (vor x² steht 1) mit den Lösungen x₁ und x₂ gilt:
+- `x₁ + x₂ = −p`
+- `x₁ · x₂ = q`
+
+Warum: `(x − x₁)(x − x₂) = x² − (x₁ + x₂)·x + x₁·x₂`. Koeffizienten vergleichen, fertig.
+Steht vor x² eine Zahl a ≠ 1: zuerst durch a teilen (oder `x₁ + x₂ = −b/a`, `x₁ · x₂ = c/a`).
+
+Vorgehen beim Faktorisieren:
+1. Vor x² muss 1 stehen (sonst durch a teilen).
+2. Teilerpaare von q aufschreiben.
+3. Paar suchen, dessen Summe −p ist.
+4. Kein Paar in ~10 Sekunden gefunden → Mitternachtsformel.
+
+Vorzeichen-Kompass:
+- q > 0: gleiche Vorzeichen (beide wie −p)
+- q < 0: verschiedene Vorzeichen (die grössere Zahl hat das Vorzeichen von −p)
+
+Beispiele:
+- `x² − 9x + 20`: Produkt 20, Summe 9 → 4 und 5 → `(x − 4)(x − 5)`
+- `x² + 2x − 15`: Produkt −15, Summe −2 → −5 und 3 → `(x + 5)(x − 3)`
+
+## Aufgaben Vieta (ohne Lösungen)
+1. `x² − 8x + 15 = 0`
+2. `x² + 3x − 28 = 0`
+3. `2x² − 10x + 12 = 0`
+4. Stelle eine quadratische Gleichung auf, die die Lösungen −3 und 5 hat.
+5. Eine Lösung von `x² − 5x + q = 0` ist 7. Bestimme die zweite Lösung und q.
