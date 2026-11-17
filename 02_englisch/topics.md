@@ -1,4 +1,4 @@
-# Zweite Landessprache oder Englisch – 3 h schriftlich, 15 min mündlich
+# Englisch – 3 h schriftlich, 15 min mündlich
 
 > ⚠️ Draft checklist built from search excerpts and typical Passerelle content. Correct it against the *Richtlinien 2023* (binding) before relying on it.
 

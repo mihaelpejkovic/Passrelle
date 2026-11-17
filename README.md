@@ -11,18 +11,21 @@ Study workspace for the Swiss Passerelle exam (Berufsmaturität/Fachmaturität �
 | What | When | Status |
 |---|---|---|
 | **Registration deadline (Winter 2027)** | **1 Dec 2026** (opened 20 Oct 2026) | ✅ SBFI session table – act now |
-| Written exams | calendar weeks 7–8 → **15–26 Feb 2027** (Zürich) | ⚠️ weeks confirmed, exact days not |
-| Oral exams | calendar weeks 9–10, probably **5–6 Mar 2027** (Pfäffikon SZ) | ⚠️ exact days not confirmed |
+| Written exams | **15–19 Feb 2027** (Zürich) | ⚠️ week and place confirmed; exact days from a second research pass, check on your Aufgebot |
+| Oral exams | **8–11 Mar 2027** (Pfäffikon SZ) | ⚠️ week and place confirmed; exact days as above |
 
-From 17 Nov 2026 it is **90 days to 15 Feb 2027** (earliest possible written day) and about
-**108 days to the orals**. So "about 90 days" is right for the written part.
+From 17 Nov 2026 it is **90 days to 15 Feb 2027** (first written day) and **111 days to 8 Mar 2027**
+(first oral day). Registration is online at matura-ch.ch.
+
+**My setup:** whole exam in Winter 2027, self-study, second language Englisch.
+Geografie regional topic for Winter 2027: **USA** ✅.
 
 ## Exam structure ✅
 
 | Subject | Written | Oral | Folder |
 |---|---|---|---|
 | Deutsch (erste Landessprache) | 4 h | 15 min (+15 min prep) | `01_deutsch/` |
-| Zweite Landessprache oder Englisch | 3 h | 15 min (+15 min prep) | `02_zweite_sprache/` |
+| Englisch (zweite Sprache) | 3 h | 15 min (+15 min prep) | `02_englisch/` |
 | Mathematik | 3 h | 15 min (+15 min prep) | `03_mathematik/` |
 | Naturwissenschaften (Bio, Chemie, Physik) | 4 h = 3 × 80 min | – | `04_naturwissenschaften/` |
 | Geistes- und Sozialwissenschaften (Geschichte, Geografie) | 4 h = 2 × 2 h | – | `05_geistes_sozialwissenschaften/` |
@@ -31,7 +34,8 @@ From 17 Nov 2026 it is **90 days to 15 Feb 2027** (earliest possible written day
 - Science and GSW grades are the mean of their sub-subjects.
 - **Split option:** the exam may be taken over two sessions. Teilprüfung 1 = Naturwissenschaften + GSW
   (written only); Teilprüfung 2 = Deutsch, second language, Mathematik. On a first attempt
-  Teilprüfung 1 must come first.
+  Teilprüfung 1 must come first. (SBFI FAQ wording; a handoff note claimed a different split – this one is right.)
+- **Retake:** one retake allowed; subjects with grade ≥ 5.0 need not be repeated (⚠️ conditions set by SBFI).
 - Exam questions are based only on the *Richtlinien 2023*, not on any textbook.
 
 ## Folder structure
@@ -39,7 +43,7 @@ From 17 Nov 2026 it is **90 days to 15 Feb 2027** (earliest possible written day
 ```
 00_admin/                  registration, deadlines, official PDFs
 01_deutsch/                topics.md, literatur/, notizen/, uebungen/, alte_pruefungen/
-02_zweite_sprache/         same layout
+02_englisch/               same layout
 03_mathematik/             same layout (no literatur/)
 04_naturwissenschaften/    biologie/  chemie/  physik/   (each with the same layout)
 05_geistes_sozialwissenschaften/   geschichte/  geografie/

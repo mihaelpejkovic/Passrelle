@@ -10,5 +10,5 @@
 - [ ] Stadt: Städte, Megastädte, Verstädterung
 - [ ] Raumplanung
 - [ ] Wirtschaft, Globalisierung, Entwicklung
-- [ ] Regionalgeografie
+- [ ] Regionalgeografie: **USA** (topic for Winter 2027) – Naturraum, Bevölkerung, Wirtschaft, Städte, aktuelle Probleme
 - [ ] Arbeit mit Karten, Diagrammen, Statistiken
