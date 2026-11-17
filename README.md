@@ -34,8 +34,9 @@ Geografie regional topic for Winter 2027: **USA** ✅.
 - Science and GSW grades are the mean of their sub-subjects.
 - **Split option:** the exam may be taken over two sessions. Teilprüfung 1 = Naturwissenschaften + GSW
   (written only); Teilprüfung 2 = Deutsch, second language, Mathematik. On a first attempt
-  Teilprüfung 1 must come first. (SBFI FAQ wording; a handoff note claimed a different split – this one is right.)
+  Teilprüfung 1 must come first. ✅ official registration info
 - **Retake:** one retake allowed; subjects with grade ≥ 5.0 need not be repeated (⚠️ conditions set by SBFI).
+- **Fee:** CHF 700 for the whole exam (CHF 200 registration + CHF 500). ✅ official registration info
 - Exam questions are based only on the *Richtlinien 2023*, not on any textbook.
 
 ## Folder structure
