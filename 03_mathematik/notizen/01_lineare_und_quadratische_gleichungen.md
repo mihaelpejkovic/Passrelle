@@ -89,3 +89,13 @@ Beispiele:
 3. `2x² − 10x + 12 = 0`
 4. Stelle eine quadratische Gleichung auf, die die Lösungen −3 und 5 hat.
 5. Eine Lösung von `x² − 5x + q = 0` ist 7. Bestimme die zweite Lösung und q.
+
+## Knacknüsse (ohne Lösungen)
+1. `x⁴ − 13x² + 36 = 0`
+2. `x/(x − 2) − 4/(x + 2) = 8/(x² − 4)`
+3. `√(2x + 7) = x − 4`
+4. Für welche Werte von m hat `(m − 1)x² + 4x + 2 = 0` genau eine Lösung?
+5. x₁ und x₂ sind die Lösungen von `x² − 7x + 3 = 0`. Berechne `x₁² + x₂²`, ohne die Gleichung zu lösen.
+6. Löse nach x auf (a ist eine Zahl): `x² − (a + 3)x + 3a = 0`
+7. Ein Velofahrer fährt 60 km. Wäre er 5 km/h schneller, bräuchte er 1 Stunde weniger. Wie schnell fährt er?
+8. Bonus: `4^x − 6·2^x + 8 = 0`
