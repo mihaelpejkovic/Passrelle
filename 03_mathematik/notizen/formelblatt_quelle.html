@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Formelblatt Gleichungen</title>
+<link rel="stylesheet" href="node_modules/katex/dist/katex.min.css">
+<script src="node_modules/katex/dist/katex.min.js"></script>
+<script src="node_modules/katex/dist/contrib/auto-render.min.js"></script>
+<style>
+@page { size: A4; margin: 14mm 14mm 14mm 16mm; }
+:root { --ink:#1b2a45; --muted:#56647c; --accent:#1f4fa3; --red:#c43d45; --line:#c6d2e1; --chip:#eef2f9; }
+* { box-sizing: border-box; }
+body { font-family: "Inter", "DejaVu Sans", sans-serif; color: var(--ink); font-size: 9.6pt; line-height: 1.4; margin: 0; }
+.katex { font-size: 1.05em; }
+header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--accent); padding-bottom: 4px; margin-bottom: 10px; }
+h1 { font-size: 18pt; margin: 0; color: var(--accent); letter-spacing: -.01em; }
+header .sub { font-size: 8.5pt; color: var(--muted); }
+h2 { font-size: 11pt; margin: 0 0 5px; color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+section { break-inside: avoid; margin-bottom: 10px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+.rules { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; align-items: baseline; }
+.rules .l { color: var(--muted); font-size: 8.5pt; }
+.warn { background: #fdf0f1; border-left: 3px solid var(--red); padding: 4px 8px; margin-top: 5px; font-size: 8.8pt; }
+.warn b { color: var(--red); }
+.note { color: var(--muted); font-size: 8.6pt; margin: 4px 0 0; }
+table { border-collapse: collapse; width: 100%; }
+td, th { border-bottom: 1px solid var(--line); padding: 4px 6px 4px 0; vertical-align: top; text-align: left; }
+th { font-size: 8pt; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+td.typ { font-weight: 600; width: 19%; }
+td.ex { width: 36%; font-size: 9pt; }
+ol { margin: 0; padding-left: 15px; }
+ol li { margin: 0; }
+.page2 { break-before: page; }
+.foot { font-size: 7.8pt; color: var(--muted); margin-top: 6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Formelblatt Gleichungen</h1>
+  <span class="sub">Passerelle Mathematik · Algebra · eigenes Hilfsmittel</span>
+</header>
+
+<div class="grid">
+  <section>
+    <h2>Umformen</h2>
+    <div class="rules">
+      <span class="l">erlaubt</span><span>auf beiden Seiten dasselbe addieren, subtrahieren, mit einer Zahl \(\neq 0\) multiplizieren oder teilen</span>
+      <span class="l">Nullprodukt</span><span>\(A\cdot B = 0 \iff A = 0\ \text{oder}\ B = 0\)</span>
+    </div>
+    <p class="warn"><b>Nie durch einen Term mit \(x\) teilen</b>, sonst geht die Lösung \(x = 0\) verloren. Stattdessen ausklammern: \(x^3 = 4x \Rightarrow x(x^2-4) = 0\).</p>
+  </section>
+
+  <section>
+    <h2>Binomische Formeln</h2>
+    <div class="rules">
+      <span class="l">1.</span><span>\((a+b)^2 = a^2 + 2ab + b^2\)</span>
+      <span class="l">2.</span><span>\((a-b)^2 = a^2 - 2ab + b^2\)</span>
+      <span class="l">3.</span><span>\((a+b)(a-b) = a^2 - b^2\)</span>
+      <span class="l">hoch 3</span><span>\((a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3\)</span>
+    </div>
+    <p class="warn"><b>Falle:</b> \((a+b)^2 \neq a^2 + b^2\)</p>
+  </section>
+
+  <section>
+    <h2>Potenzen</h2>
+    <div class="rules">
+      <span class="l">gleiche Basis</span><span>\(a^m \cdot a^n = a^{m+n} \qquad \dfrac{a^m}{a^n} = a^{m-n}\)</span>
+      <span class="l">Potenz hoch</span><span>\((a^m)^n = a^{m\cdot n}\)</span>
+      <span class="l">gleicher Exp.</span><span>\(a^n \cdot b^n = (ab)^n \qquad \dfrac{a^n}{b^n} = \left(\dfrac{a}{b}\right)^n\)</span>
+      <span class="l">null, negativ</span><span>\(a^0 = 1 \qquad a^{-n} = \dfrac{1}{a^n}\)</span>
+      <span class="l">Bruch-Exp.</span><span>\(a^{\frac{1}{n}} = \sqrt[n]{a} \qquad a^{\frac{m}{n}} = \sqrt[n]{a^m}\)</span>
+    </div>
+    <p class="warn"><b>Fallen:</b> \(a^m + a^n \neq a^{m+n}\) · \(-x^2 = -(x^2)\), nicht \((-x)^2\) · \(4^x = (2^2)^x = (2^x)^2\)</p>
+  </section>
+
+  <section>
+    <h2>Wurzeln</h2>
+    <div class="rules">
+      <span class="l">Produkt</span><span>\(\sqrt{ab} = \sqrt{a}\cdot\sqrt{b} \qquad \sqrt{\tfrac{a}{b}} = \tfrac{\sqrt{a}}{\sqrt{b}}\)</span>
+      <span class="l">teilweise</span><span>\(\sqrt{72} = \sqrt{36\cdot 2} = 6\sqrt{2}\)</span>
+      <span class="l">Quadrat</span><span>\(\sqrt{a^2} = |a| \qquad x^2 = 9 \Rightarrow x = \pm 3\)</span>
+      <span class="l">Nenner</span><span>\(\dfrac{1}{\sqrt{2}} = \dfrac{\sqrt{2}}{2}\)</span>
+    </div>
+    <p class="warn"><b>Falle:</b> \(\sqrt{a+b} \neq \sqrt{a} + \sqrt{b}\) · \(\sqrt{\text{negativ}}\) existiert nicht</p>
+  </section>
+
+  <section>
+    <h2>Logarithmen</h2>
+    <div class="rules">
+      <span class="l">Definition</span><span>\(\log_a b = c \iff a^c = b \qquad (a > 0,\ a \neq 1,\ b > 0)\)</span>
+      <span class="l">Spezialwerte</span><span>\(\log_a 1 = 0 \qquad \log_a a = 1 \qquad \log_a a^x = x\)</span>
+      <span class="l">Produkt</span><span>\(\log(u\cdot v) = \log u + \log v\)</span>
+      <span class="l">Quotient</span><span>\(\log\tfrac{u}{v} = \log u - \log v\)</span>
+      <span class="l">Potenz</span><span>\(\log(u^r) = r\cdot\log u\)</span>
+      <span class="l">Basiswechsel</span><span>\(\log_a b = \dfrac{\lg b}{\lg a} = \dfrac{\ln b}{\ln a}\)</span>
+    </div>
+    <p class="note">\(\lg = \log_{10}\), \(\ln = \log_e\). Der Prüfungsrechner hat nur diese zwei, andere Basen über Basiswechsel.</p>
+    <p class="warn"><b>Falle:</b> \(\log(u+v) \neq \log u + \log v\) · Argument muss \(> 0\) sein</p>
+  </section>
+
+  <section>
+    <h2>Quadratische Gleichungen</h2>
+    <div class="rules">
+      <span class="l">Form</span><span>\(ax^2 + bx + c = 0\)</span>
+      <span class="l">Formel</span><span>\(x_{1,2} = \dfrac{-b \pm \sqrt{D}}{2a} \qquad D = b^2 - 4ac\)</span>
+      <span class="l">Anzahl</span><span>\(D>0\): zwei · \(D=0\): eine · \(D<0\): keine</span>
+      <span class="l">Vieta (a = 1)</span><span>\(x^2 + px + q = 0\): \(\ x_1 + x_2 = -p,\ \ x_1 x_2 = q\)</span>
+      <span class="l">mit s und p</span><span>\(x_1^2 + x_2^2 = s^2 - 2p \quad \tfrac{1}{x_1}+\tfrac{1}{x_2} = \tfrac{s}{p}\)</span>
+    </div>
+    <p class="warn"><b>Falle:</b> \(c\) negativ \(\Rightarrow -4ac\) positiv. Klammer ausschreiben: \(-4\cdot 2\cdot(-6) = +48\)</p>
+  </section>
+</div>
+
+<section>
+  <h2>Checkliste am Ende jeder Aufgabe</h2>
+  <div class="grid">
+    <ol>
+      <li>Verbotene Werte und erlaubter Bereich beachtet?</li>
+      <li>Beim Wurzelziehen \(\pm\) gesetzt?</li>
+      <li>Nach Substitution zu \(x\) zurückgerechnet?</li>
+    </ol>
+    <ol start="4">
+      <li>Probe in der <b>ursprünglichen</b> Gleichung gemacht?</li>
+      <li>Textaufgabe: Lösungen auf Sinn geprüft, Antwortsatz mit Einheit?</li>
+      <li>Lösungsmenge sauber notiert: \(\mathbb{L} = \{\dots\}\)</li>
+    </ol>
+  </div>
+</section>
+
+<section class="page2">
+  <h2>Verfahren nach Gleichungstyp</h2>
+  <table>
+    <thead><tr><th>Typ</th><th>Vorgehen</th><th>Mini-Beispiel</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="typ">Linear</td>
+        <td><ol><li>Klammern auflösen, Brüche weg (mit Hauptnenner mal)</li><li>\(x\) links, Zahlen rechts</li><li>durch Faktor vor \(x\) teilen</li></ol></td>
+        <td class="ex">\(\tfrac{x+2}{3} = 4 \Rightarrow x + 2 = 12 \Rightarrow x = 10\)</td>
+      </tr>
+      <tr>
+        <td class="typ">Quadratisch</td>
+        <td><ol><li>alles auf eine Seite, rechts 0</li><li>kein \(c\): ausklammern · kein \(b\): Wurzel, \(\pm\)</li><li>sonst Vieta (wenn \(a=1\)) oder Formel</li></ol></td>
+        <td class="ex">\(x^2 - 7x + 10 = 0 \Rightarrow (x-2)(x-5) = 0\)</td>
+      </tr>
+      <tr>
+        <td class="typ">Höheren Grades</td>
+        <td><ol><li>\(x\) ausklammern, wenn möglich</li><li>nur \(x^4\) und \(x^2\): Substitution \(u = x^2\)</li><li>sonst Lösung raten (Teiler der Zahl ohne \(x\)), dann Polynomdivision durch \((x - x_1)\)</li></ol></td>
+        <td class="ex">\(x^3 - 2x^2 - 5x + 6\): \(x=1\) passt \(\Rightarrow (x-1)(x^2 - x - 6)\)</td>
+      </tr>
+      <tr>
+        <td class="typ">Bruch</td>
+        <td><ol><li><b>verbotene Werte</b> notieren (Nenner \(= 0\))</li><li>Nenner faktorisieren, Hauptnenner bestimmen</li><li>mit Hauptnenner multiplizieren, lösen</li><li>verbotene Lösungen streichen</li></ol></td>
+        <td class="ex">\(\tfrac{x}{x-2} = \tfrac{2}{x-2}\): \(x \neq 2\), Lösung wäre \(x = 2\) \(\Rightarrow \mathbb{L} = \{\,\}\)</td>
+      </tr>
+      <tr>
+        <td class="typ">Wurzel</td>
+        <td><ol><li>erlaubter Bereich: Wurzelinhalt \(\ge 0\)</li><li>eine Wurzel isolieren, quadrieren</li><li>falls nötig: zweite isolieren, nochmals quadrieren</li><li>lösen, <b>Probe ist Pflicht</b></li></ol></td>
+        <td class="ex">\(\sqrt{x+2} = x\): \(x^2 - x - 2 = 0\), \(x = 2\) ✓, \(x = -1\) ✗</td>
+      </tr>
+      <tr>
+        <td class="typ">Betrag</td>
+        <td><ol><li>\(|T| = c\) mit Zahl \(c \ge 0\): \(T = c\) oder \(T = -c\) (\(c<0\): keine Lösung)</li><li>\(x\) auf beiden Seiten: Fall \(T \ge 0\) und Fall \(T < 0\) getrennt</li><li>Lösung muss zum Fall passen</li></ol></td>
+        <td class="ex">\(|x - 1| = 3 \Rightarrow x - 1 = 3\) oder \(x - 1 = -3\) \(\Rightarrow x = 4,\ x = -2\)</td>
+      </tr>
+      <tr>
+        <td class="typ">Exponential</td>
+        <td><ol><li>gleiche Basis möglich: Exponenten gleichsetzen</li><li>sonst Potenz isolieren und logarithmieren: \(a^x = b \Rightarrow x = \tfrac{\lg b}{\lg a}\)</li><li>\(a^{2x}\) und \(a^x\) zusammen: Substitution \(u = a^x > 0\)</li></ol></td>
+        <td class="ex">\(2^{x+1} = 8 = 2^3 \Rightarrow x + 1 = 3 \Rightarrow x = 2\)<br>\(5^x = 7 \Rightarrow x = \tfrac{\lg 7}{\lg 5} \approx 1{,}209\)</td>
+      </tr>
+      <tr>
+        <td class="typ">Logarithmus</td>
+        <td><ol><li>erlaubter Bereich: jedes Argument \(> 0\)</li><li>mit den Log-Regeln zu einem einzigen \(\log\) zusammenfassen</li><li>entlogarithmieren: \(\log_a T = c \Rightarrow T = a^c\)</li><li>lösen, Bereich prüfen</li></ol></td>
+        <td class="ex">\(\log_3(x-1) = 2 \Rightarrow x - 1 = 3^2 \Rightarrow x = 10\)</td>
+      </tr>
+      <tr>
+        <td class="typ">Substitution</td>
+        <td><ol><li>wiederkehrenden Ausdruck durch \(u\) ersetzen</li><li>Gleichung in \(u\) lösen</li><li><b>zurück zu \(x\)</b>, jede \(u\)-Lösung einzeln</li></ol></td>
+        <td class="ex">\((\lg x)^2 - 3\lg x = 0\): \(u = \lg x\), \(u = 0\) oder \(3\) \(\Rightarrow x = 1,\ x = 1000\)</td>
+      </tr>
+      <tr>
+        <td class="typ">Parameter</td>
+        <td><ol><li>„genau eine / zwei / keine Lösung“ in \(D = 0\), \(D>0\), \(D<0\) übersetzen</li><li>Fall: Faktor vor \(x^2\) wird \(0\) separat prüfen</li></ol></td>
+        <td class="ex">\(x^2 + kx + 9 = 0\) genau eine Lösung: \(k^2 - 36 = 0 \Rightarrow k = \pm 6\)</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Polynomdivision kurz</h2>
+  <p style="margin:0">\((x^3 - 2x^2 - 5x + 6) : (x - 1) = x^2 - x - 6\). Schritt: höchsten Term teilen (\(x^3 : x = x^2\)), zurückmultiplizieren (\(x^3 - x^2\)), abziehen (\(-x^2 - 5x\)), wiederholen. Rest muss \(0\) sein, sonst war die geratene Lösung falsch.</p>
+</section>
+
+
+
+<p class="foot">An der Prüfung ist eine offizielle Formelsammlung erlaubt (z. B. Fundamentum Mathematik und Physik), ohne eigene Notizen. Dieses Blatt ist nur zum Üben.</p>
+
+<script>
+renderMathInElement(document.body, { delimiters: [{left: "\\(", right: "\\)", display: false}], throwOnError: false });
+document.body.dataset.ready = "1";
+</script>
+</body>
+</html>

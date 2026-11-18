@@ -1,0 +1,498 @@
+<title>Gleichungen gemischt</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' },
+    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+/* Layout: a single notebook page on Swiss Häuschenpapier (5 mm grid), red margin line on the left, tasks as entries down the page */
+:root {
+  --paper: #fbfcfe;
+  --grid: #dce6f1;
+  --ink: #1b2a45;
+  --muted: #56647c;
+  --accent: #1f4fa3;
+  --margin: #d4444c;
+  --field: #ffffff;
+  --line: #c6d2e1;
+  --chip: #e8eef8;
+  --ok: #2b7a4b;
+  --warn: #9a6200;
+  --bad: #c0392b;
+  --f-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --sq: 20px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141a25; --grid: #212b3a; --ink: #e2e8f2; --muted: #9eabc0; --accent: #93b4ff;
+    --margin: #e07079; --field: #1a2230; --line: #334156; --chip: #233049; --ok: #6fcf97; --warn: #f2b84b; --bad: #ff8a80; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141a25; --grid: #212b3a; --ink: #e2e8f2; --muted: #9eabc0; --accent: #93b4ff;
+  --margin: #e07079; --field: #1a2230; --line: #334156; --chip: #233049; --ok: #6fcf97; --warn: #f2b84b; --bad: #ff8a80; color-scheme: dark;
+}
+
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: var(--sq) var(--sq);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  border-left: 2px solid var(--margin);
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+header.top { display: flex; flex-direction: column; gap: 10px; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 14px;
+}
+h1 {
+  font-family: var(--f-hand); font-weight: 700; font-size: clamp(40px, 7vw, 56px); line-height: 1.05;
+  margin: 0; color: var(--accent); text-wrap: balance;
+}
+.lead { margin: 0; max-width: 62ch; color: var(--ink); }
+.note {
+  font-size: 14px; color: var(--muted); margin: 0; max-width: 62ch;
+}
+.note strong { color: var(--ink); font-weight: 600; }
+
+h2 {
+  font-family: var(--f-hand); font-weight: 700; font-size: 32px; margin: 0; color: var(--ink); line-height: 1.1;
+}
+
+.tasks { display: flex; flex-direction: column; gap: 28px; counter-reset: none; }
+.task {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 12px;
+  padding-bottom: 28px; border-bottom: 1px dashed var(--line);
+}
+.task:last-child { border-bottom: 0; padding-bottom: 0; }
+.num {
+  font-family: var(--f-hand); font-size: 36px; font-weight: 700; color: var(--margin); line-height: 1;
+  margin-left: -4px; padding-top: 2px;
+}
+.body { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.topic {
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; background: var(--chip); color: var(--ink);
+  padding: 2px 8px; border-radius: 4px;
+}
+.lvl { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.lvl b { color: var(--accent); font-weight: 500; }
+.q { margin: 0; max-width: 62ch; }
+.q p { margin: 0 0 6px; }
+.formula { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.parts { margin: 4px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+
+label.ans { font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+textarea {
+  width: 100%; box-sizing: border-box; resize: vertical; min-height: 64px;
+  font-family: var(--f-hand); font-size: 22px; line-height: 1.3; color: var(--accent);
+  background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px;
+}
+textarea:focus-visible, input:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+.panel {
+  background: var(--field); border: 1px solid var(--line); border-radius: 8px; padding: 18px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.panel p { margin: 0; max-width: 62ch; }
+
+.lab-controls { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; }
+.lab-controls label { display: flex; flex-direction: column; gap: 4px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.lab-controls input[type="number"] {
+  width: 84px; font-family: var(--f-mono); font-size: 16px; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px;
+}
+.lab-controls .check { flex-direction: row; align-items: center; gap: 8px; font-size: 13px; color: var(--ink); }
+.readout {
+  font-family: var(--f-mono); font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.readout .tag { color: var(--accent); font-weight: 500; }
+.canvas-wrap { overflow-x: auto; }
+canvas { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 6px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+button {
+  font-family: var(--f-body); font-size: 15px; font-weight: 500; cursor: pointer;
+  background: var(--accent); color: var(--paper); border: 0; border-radius: 6px; padding: 10px 16px;
+}
+button.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+.status { font-size: 14px; color: var(--muted); }
+#copy-fallback { font-family: var(--f-mono); font-size: 13px; color: var(--ink); min-height: 120px; }
+
+.summary { display: flex; flex-direction: column; gap: 8px; }
+.summary ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; max-width: 62ch; }
+.sol { display: flex; flex-direction: column; gap: 10px; padding-top: 20px; border-top: 1px dashed var(--line); min-width: 0; }
+.sol h3 {
+  font-family: var(--f-hand); font-weight: 700; font-size: 28px; line-height: 1.1; margin: 0; color: var(--ink);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;
+}
+.sol h3 .n { color: var(--margin); }
+.chip { font-family: var(--f-mono); font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 4px; border: 1px solid currentColor; }
+.chip.ok { color: var(--ok); }
+.chip.part { color: var(--warn); }
+.chip.bad { color: var(--bad); }
+.chip.open { color: var(--muted); }
+.yours { margin: 0; font-size: 14px; color: var(--muted); }
+.yours span { font-family: var(--f-hand); font-size: 21px; color: var(--accent); }
+.sol p { margin: 0; max-width: 62ch; }
+.steps { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; max-width: 62ch; }
+.steps li { min-width: 0; }
+.result { font-weight: 600; }
+.tip {
+  margin: 0; max-width: 62ch; padding: 8px 12px; background: var(--chip);
+  border-left: 3px solid var(--margin); border-radius: 0 6px 6px 0; font-size: 15px;
+}
+.tip strong { color: var(--margin); }
+.tablewrap { overflow-x: auto; }
+table.t { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 15px; }
+table.t th, table.t td { text-align: left; padding: 6px 14px 6px 0; border-bottom: 1px solid var(--line); }
+table.t th { font-family: var(--f-mono); font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
+.fig { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.fig svg { width: 100%; max-width: 440px; height: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; }
+.fig figcaption { font-size: 13px; color: var(--muted); max-width: 62ch; }
+.fig .ax { stroke: var(--muted); stroke-width: 1.2; fill: none; }
+.fig .gr { stroke: var(--grid); stroke-width: 1; fill: none; }
+.fig .curve { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+.fig .hl { stroke: var(--ok); stroke-width: 6; stroke-linecap: round; fill: none; }
+.fig .lo { stroke: var(--bad); stroke-width: 6; stroke-linecap: round; fill: none; }
+.fig .tan { stroke: var(--margin); stroke-width: 2; fill: none; }
+.fig .miss { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.fig .dot { fill: var(--margin); }
+.fig .dot2 { fill: var(--ink); }
+.fig text { fill: var(--muted); font-family: var(--f-mono); font-size: 12px; }
+.fig text.lab { fill: var(--ink); }
+
+@media (max-width: 520px) {
+  .page { padding-left: 14px; gap: 32px; }
+  .task { grid-template-columns: 30px minmax(0, 1fr); gap: 4px 8px; }
+  .num { font-size: 30px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<main class="page">
+  <header class="top">
+    <div class="eyebrow"><span>Mathematik</span><span>Algebra · Gleichungen</span><span>Serie 2 · gemischt</span><span>12 Aufgaben</span></div>
+    <h1>Gleichungen gemischt</h1>
+    <p class="lead">Der Gleichungstyp steht diesmal nicht dabei: Erkennen gehört zur Aufgabe. Dein Formelblatt darfst du benutzen. Löse auf Papier, schreib dein Ergebnis ins Feld darunter und schick mir am Schluss alle Antworten mit dem Knopf unten. Lösungen und Erklärungen kommen danach auf diese Seite.</p>
+    <p class="note"><strong>Wie an der Prüfung:</strong> nur der Casio FX-82 Solar oder der TI-30 ECO RS, keine Formelsammlung für Mathe-Tricks, die du nicht selbst herleiten kannst. Probe nicht vergessen.</p>
+    <p class="note">Die Aufgaben sind im Stil der Maturitäts- und Passerelle-Prüfung geschrieben. Offizielle Prüfungen sind beim SBFI nur auf Anfrage einsehbar.</p>
+  </header>
+
+  <section class="tasks" aria-label="Aufgaben">
+    <article class="task">
+      <div class="num">1</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 1 von 3"><b>●</b>○○</span></div>
+        <div class="q"><p>Bestimme \(x\).</p><div class="formula">\[ 8^{\,x-1} = 4^{\,x+1} \]</div></div>
+        <label class="ans" for="ans-1">Deine Lösung</label>
+        <textarea id="ans-1" data-n="1" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">2</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 1 von 3"><b>●</b>○○</span></div>
+        <div class="q"><p>Bestimme \(x\) auf drei Dezimalstellen.</p><div class="formula">\[ 3\cdot 5^{x} = 40 \]</div></div>
+        <label class="ans" for="ans-2">Deine Lösung</label>
+        <textarea id="ans-2" data-n="2" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">3</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 1 von 3"><b>●</b>○○</span></div>
+        <div class="q"><p>Bestimme die Lösungsmenge.</p><div class="formula">\[ |2x - 3| = 7 \]</div></div>
+        <label class="ans" for="ans-3">Deine Lösung</label>
+        <textarea id="ans-3" data-n="3" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">4</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 1 von 3"><b>●</b>○○</span></div>
+        <div class="q"><p>Bestimme alle Lösungen.</p><div class="formula">\[ x^3 - 5x^2 + 6x = 0 \]</div></div>
+        <label class="ans" for="ans-4">Deine Lösung</label>
+        <textarea id="ans-4" data-n="4" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">5</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 2 von 3"><b>●●</b>○</span></div>
+        <div class="q"><p>Bestimme die Lösungsmenge.</p><div class="formula">\[ \log_2(x+3) + \log_2(x-3) = 4 \]</div></div>
+        <label class="ans" for="ans-5">Deine Lösung</label>
+        <textarea id="ans-5" data-n="5" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">6</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 2 von 3"><b>●●</b>○</span></div>
+        <div class="q"><p>Bestimme die Lösungsmenge.</p><div class="formula">\[ x - \sqrt{x+2} = 4 \]</div></div>
+        <label class="ans" for="ans-6">Deine Lösung</label>
+        <textarea id="ans-6" data-n="6" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">7</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 2 von 3"><b>●●</b>○</span></div>
+        <div class="q"><p>Bestimme die Lösungsmenge.</p><div class="formula">\[ \frac{2}{x-1} - \frac{1}{x+1} = \frac{4}{x^2-1} \]</div></div>
+        <label class="ans" for="ans-7">Deine Lösung</label>
+        <textarea id="ans-7" data-n="7" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">8</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 2 von 3"><b>●●</b>○</span></div>
+        <div class="q"><p>Bestimme die Lösungsmenge.</p><div class="formula">\[ |x - 4| = 2x + 1 \]</div></div>
+        <label class="ans" for="ans-8">Deine Lösung</label>
+        <textarea id="ans-8" data-n="8" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">9</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 2 von 3"><b>●●</b>○</span></div>
+        <div class="q"><p>Bestimme alle Lösungen.</p><div class="formula">\[ x^3 - 2x^2 - 5x + 6 = 0 \]</div></div>
+        <label class="ans" for="ans-9">Deine Lösung</label>
+        <textarea id="ans-9" data-n="9" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">10</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 2 von 3"><b>●●</b>○</span></div>
+        <div class="q"><p>Bestimme alle Lösungen.</p><div class="formula">\[ 9^{x} - 10\cdot 3^{x} + 9 = 0 \]</div></div>
+        <label class="ans" for="ans-10">Deine Lösung</label>
+        <textarea id="ans-10" data-n="10" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">11</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 3 von 3"><b>●●●</b></span></div>
+        <div class="q"><p>Bestimme \(x\) exakt und auf drei Dezimalstellen.</p><div class="formula">\[ 2^{\,x+1} = 3^{x} \]</div></div>
+        <label class="ans" for="ans-11">Deine Lösung</label>
+        <textarea id="ans-11" data-n="11" rows="2"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">12</div>
+      <div class="body">
+        <div class="meta"><span class="lvl" aria-label="Schwierigkeit 3 von 3"><b>●●●</b></span></div>
+        <div class="q"><p>Bestimme alle Lösungen.</p><div class="formula">\[ (\lg x)^2 - \lg\left(x^3\right) = 4 \]</div></div>
+        <label class="ans" for="ans-12">Deine Lösung</label>
+        <textarea id="ans-12" data-n="12" rows="2"></textarea>
+      </div>
+    </article>
+  </section>
+
+  <section class="panel" aria-labelledby="send-h">
+    <h2 id="send-h">Antworten abgeben</h2>
+    <p>Der Knopf kopiert alle Felder als Text. Füg ihn danach im Chat ein. Deine Eingaben bleiben in diesem Browser gespeichert.</p>
+    <div class="actions">
+      <button type="button" id="copy-btn">Alle Antworten kopieren</button>
+      <button type="button" class="ghost" id="clear-btn">Felder leeren</button>
+      <span class="status" id="status" role="status"></span>
+    </div>
+    <textarea id="copy-fallback" hidden readonly aria-label="Antworten zum Kopieren"></textarea>
+  </section>
+
+  <section class="panel" aria-labelledby="lab-h">
+    <h2 id="lab-h">Parabel-Labor</h2>
+    <p>Gib \(a\), \(b\) und \(c\) von \(ax^2 + bx + c = 0\) ein. Die Lösungen sind die Stellen, an denen die Parabel die x-Achse schneidet. So siehst du, warum \(D\) die Anzahl Lösungen bestimmt.</p>
+    <div class="lab-controls">
+      <label for="la">a<input type="number" id="la" value="1" step="0.5"></label>
+      <label for="lb">b<input type="number" id="lb" value="-2" step="0.5"></label>
+      <label for="lc">c<input type="number" id="lc" value="-3" step="0.5"></label>
+      <label class="check" for="lroots"><input type="checkbox" id="lroots"> Nullstellen anzeigen</label>
+    </div>
+    <div class="readout" id="readout" aria-live="polite"></div>
+    <div class="canvas-wrap"><canvas id="plot" width="720" height="405" aria-label="Graph der Parabel"></canvas></div>
+  </section>
+
+  <section class="panel solutions" aria-labelledby="sol-h">
+    <h2 id="sol-h">Lösungen und Erklärungen</h2>
+    <p>Kommen hierhin, sobald du mir deine Antworten im Chat geschickt hast.</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  var KEY = 'gleichungen-gemischt-s2-';
+  var fields = Array.prototype.slice.call(document.querySelectorAll('textarea[data-n]'));
+  var status = document.getElementById('status');
+
+  function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  fields.forEach(function (f) {
+    var v = load(KEY + f.dataset.n);
+    if (v) f.value = v;
+    f.addEventListener('input', function () { save(KEY + f.dataset.n, f.value); });
+  });
+
+  function compile() {
+    var lines = ['Gleichungen gemischt, Serie 2'];
+    fields.forEach(function (f) {
+      var v = f.value.trim().replace(/\s*\n\s*/g, ' / ');
+      lines.push(f.dataset.n + ': ' + (v || '(leer)'));
+    });
+    return lines.join('\n');
+  }
+
+  var fb = document.getElementById('copy-fallback');
+  document.getElementById('copy-btn').addEventListener('click', function () {
+    var text = compile();
+    function fallback() {
+      fb.hidden = false; fb.value = text; fb.focus(); fb.select();
+      status.textContent = 'Kopieren ging nicht automatisch. Der Text ist markiert, kopiere ihn von Hand.';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () {
+        fb.hidden = true;
+        status.textContent = 'Kopiert. Füg es im Chat ein.';
+      }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  var armed = false;
+  document.getElementById('clear-btn').addEventListener('click', function (ev) {
+    if (!armed) {
+      armed = true; ev.target.textContent = 'Wirklich leeren?';
+      setTimeout(function () { armed = false; ev.target.textContent = 'Felder leeren'; }, 3000);
+      return;
+    }
+    fields.forEach(function (f) { f.value = ''; save(KEY + f.dataset.n, ''); });
+    armed = false; ev.target.textContent = 'Felder leeren';
+    status.textContent = 'Alle Felder geleert.';
+  });
+
+  /* Parabel-Labor */
+  var cv = document.getElementById('plot');
+  var ctx = cv.getContext('2d');
+  var inA = document.getElementById('la'), inB = document.getElementById('lb'), inC = document.getElementById('lc');
+  var inR = document.getElementById('lroots');
+  var readout = document.getElementById('readout');
+
+  function tok(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function fmt(n) {
+    if (!isFinite(n)) return '–';
+    var r = Math.round(n * 1000) / 1000;
+    return String(r).replace('.', ',');
+  }
+
+  function draw() {
+    var a = parseFloat(inA.value), b = parseFloat(inB.value), c = parseFloat(inC.value);
+    if (!isFinite(a)) a = 0; if (!isFinite(b)) b = 0; if (!isFinite(c)) c = 0;
+
+    var dpr = window.devicePixelRatio || 1;
+    var W = cv.clientWidth || 720, H = Math.round(W * 9 / 16);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var xmin = -8, xmax = 8, ymin = -10, ymax = 10;
+    if (a !== 0) {
+      var vx = -b / (2 * a), vy = a * vx * vx + b * vx + c;
+      xmin = Math.floor(vx - 7); xmax = Math.ceil(vx + 7);
+      ymin = Math.min(-4, Math.floor(vy - 4)); ymax = Math.max(4, Math.ceil(vy + 4));
+      if (a > 0) ymax = Math.max(ymax, ymin + 14); else ymin = Math.min(ymin, ymax - 14);
+    }
+    var pad = 28;
+    function X(x) { return pad + (x - xmin) / (xmax - xmin) * (W - 2 * pad); }
+    function Y(y) { return H - pad - (y - ymin) / (ymax - ymin) * (H - 2 * pad); }
+
+    ctx.fillStyle = tok('--field'); ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = tok('--grid'); ctx.lineWidth = 1;
+    for (var gx = Math.ceil(xmin); gx <= xmax; gx++) { ctx.beginPath(); ctx.moveTo(X(gx), Y(ymin)); ctx.lineTo(X(gx), Y(ymax)); ctx.stroke(); }
+    var ystep = (ymax - ymin) > 30 ? 5 : (ymax - ymin) > 16 ? 2 : 1;
+    for (var gy = Math.ceil(ymin / ystep) * ystep; gy <= ymax; gy += ystep) { ctx.beginPath(); ctx.moveTo(X(xmin), Y(gy)); ctx.lineTo(X(xmax), Y(gy)); ctx.stroke(); }
+
+    ctx.strokeStyle = tok('--muted'); ctx.lineWidth = 1.25;
+    if (ymin <= 0 && ymax >= 0) { ctx.beginPath(); ctx.moveTo(X(xmin), Y(0)); ctx.lineTo(X(xmax), Y(0)); ctx.stroke(); }
+    if (xmin <= 0 && xmax >= 0) { ctx.beginPath(); ctx.moveTo(X(0), Y(ymin)); ctx.lineTo(X(0), Y(ymax)); ctx.stroke(); }
+
+    ctx.fillStyle = tok('--muted'); ctx.font = '11px ' + tok('--f-mono');
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    var ylab = (ymin <= 0 && ymax >= 0) ? Y(0) + 4 : H - pad + 4;
+    var xstep = (xmax - xmin) > 14 ? 2 : 1;
+    for (var lx = Math.ceil(xmin / xstep) * xstep; lx <= xmax; lx += xstep) { if (lx !== 0) ctx.fillText(String(lx), X(lx), ylab); }
+    ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    var xlab = (xmin <= 0 && xmax >= 0) ? X(0) - 5 : pad - 5;
+    for (var ly = Math.ceil(ymin / ystep) * ystep; ly <= ymax; ly += ystep) { if (ly !== 0) ctx.fillText(String(ly), xlab, Y(ly)); }
+
+    ctx.save();
+    ctx.beginPath(); ctx.rect(pad, pad, W - 2 * pad, H - 2 * pad); ctx.clip();
+    ctx.strokeStyle = tok('--accent'); ctx.lineWidth = 2.5; ctx.beginPath();
+    var steps = 300;
+    for (var i = 0; i <= steps; i++) {
+      var x = xmin + (xmax - xmin) * i / steps, y = a * x * x + b * x + c;
+      if (i === 0) ctx.moveTo(X(x), Y(y)); else ctx.lineTo(X(x), Y(y));
+    }
+    ctx.stroke();
+    ctx.restore();
+
+    var D = b * b - 4 * a * c, roots = [], text;
+    if (a === 0) {
+      if (b !== 0) { roots = [-c / b]; text = 'linear: 1 Lösung'; }
+      else { text = c === 0 ? 'jedes x ist Lösung' : 'keine Lösung'; }
+      readout.innerHTML = '<span><span class="tag">a = 0</span> keine quadratische Gleichung</span><span>' + text + '</span>';
+    } else {
+      if (D > 0) { roots = [(-b - Math.sqrt(D)) / (2 * a), (-b + Math.sqrt(D)) / (2 * a)]; text = 'D &gt; 0: 2 Lösungen'; }
+      else if (D === 0) { roots = [-b / (2 * a)]; text = 'D = 0: 1 Lösung (Parabel berührt die x-Achse)'; }
+      else { text = 'D &lt; 0: keine reelle Lösung (Parabel trifft die x-Achse nie)'; }
+      readout.innerHTML = '<span><span class="tag">D</span> = b² − 4ac = ' + fmt(D) + '</span><span>' + text + '</span>';
+    }
+
+    if (inR.checked && roots.length) {
+      ctx.fillStyle = tok('--margin');
+      roots.forEach(function (r) {
+        if (r < xmin || r > xmax || ymin > 0 || ymax < 0) return;
+        ctx.beginPath(); ctx.arc(X(r), Y(0), 5, 0, Math.PI * 2); ctx.fill();
+      });
+      readout.innerHTML += '<span><span class="tag">x</span> = ' + roots.map(fmt).join(' ; ') + '</span>';
+    }
+  }
+
+  [inA, inB, inC, inR].forEach(function (el) { el.addEventListener('input', draw); });
+  window.addEventListener('resize', draw);
+  try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw); } catch (e) {}
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  draw();
+})();
+</script>
