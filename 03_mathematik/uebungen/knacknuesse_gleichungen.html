@@ -23,6 +23,9 @@
   --field: #ffffff;
   --line: #c6d2e1;
   --chip: #e8eef8;
+  --ok: #2b7a4b;
+  --warn: #9a6200;
+  --bad: #c0392b;
   --f-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
   --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -31,12 +34,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #141a25; --grid: #212b3a; --ink: #e2e8f2; --muted: #9eabc0; --accent: #93b4ff;
-    --margin: #e07079; --field: #1a2230; --line: #334156; --chip: #233049; color-scheme: dark;
+    --margin: #e07079; --field: #1a2230; --line: #334156; --chip: #233049; --ok: #6fcf97; --warn: #f2b84b; --bad: #ff8a80; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #141a25; --grid: #212b3a; --ink: #e2e8f2; --muted: #9eabc0; --accent: #93b4ff;
-  --margin: #e07079; --field: #1a2230; --line: #334156; --chip: #233049; color-scheme: dark;
+  --margin: #e07079; --field: #1a2230; --line: #334156; --chip: #233049; --ok: #6fcf97; --warn: #f2b84b; --bad: #ff8a80; color-scheme: dark;
 }
 
 body {
@@ -146,7 +149,48 @@ button.ghost { background: transparent; color: var(--accent); border: 1px solid 
 .status { font-size: 14px; color: var(--muted); }
 #copy-fallback { font-family: var(--f-mono); font-size: 13px; color: var(--ink); min-height: 120px; }
 
-.solutions p { color: var(--muted); }
+.summary { display: flex; flex-direction: column; gap: 8px; }
+.summary ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; max-width: 62ch; }
+.sol { display: flex; flex-direction: column; gap: 10px; padding-top: 20px; border-top: 1px dashed var(--line); min-width: 0; }
+.sol h3 {
+  font-family: var(--f-hand); font-weight: 700; font-size: 28px; line-height: 1.1; margin: 0; color: var(--ink);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;
+}
+.sol h3 .n { color: var(--margin); }
+.chip { font-family: var(--f-mono); font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 4px; border: 1px solid currentColor; }
+.chip.ok { color: var(--ok); }
+.chip.part { color: var(--warn); }
+.chip.bad { color: var(--bad); }
+.chip.open { color: var(--muted); }
+.yours { margin: 0; font-size: 14px; color: var(--muted); }
+.yours span { font-family: var(--f-hand); font-size: 21px; color: var(--accent); }
+.sol p { margin: 0; max-width: 62ch; }
+.steps { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; max-width: 62ch; }
+.steps li { min-width: 0; }
+.result { font-weight: 600; }
+.tip {
+  margin: 0; max-width: 62ch; padding: 8px 12px; background: var(--chip);
+  border-left: 3px solid var(--margin); border-radius: 0 6px 6px 0; font-size: 15px;
+}
+.tip strong { color: var(--margin); }
+.tablewrap { overflow-x: auto; }
+table.t { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 15px; }
+table.t th, table.t td { text-align: left; padding: 6px 14px 6px 0; border-bottom: 1px solid var(--line); }
+table.t th { font-family: var(--f-mono); font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
+.fig { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.fig svg { width: 100%; max-width: 440px; height: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; }
+.fig figcaption { font-size: 13px; color: var(--muted); max-width: 62ch; }
+.fig .ax { stroke: var(--muted); stroke-width: 1.2; fill: none; }
+.fig .gr { stroke: var(--grid); stroke-width: 1; fill: none; }
+.fig .curve { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+.fig .hl { stroke: var(--ok); stroke-width: 6; stroke-linecap: round; fill: none; }
+.fig .lo { stroke: var(--bad); stroke-width: 6; stroke-linecap: round; fill: none; }
+.fig .tan { stroke: var(--margin); stroke-width: 2; fill: none; }
+.fig .miss { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.fig .dot { fill: var(--margin); }
+.fig .dot2 { fill: var(--ink); }
+.fig text { fill: var(--muted); font-family: var(--f-mono); font-size: 12px; }
+.fig text.lab { fill: var(--ink); }
 
 @media (max-width: 520px) {
   .page { padding-left: 14px; gap: 32px; }
@@ -304,7 +348,217 @@ button.ghost { background: transparent; color: var(--accent); border: 1px solid 
 
   <section class="panel solutions" aria-labelledby="sol-h">
     <h2 id="sol-h">Lösungen und Erklärungen</h2>
-    <p>Kommen hierhin, sobald du mir deine Antworten im Chat geschickt hast.</p>
+
+    <div class="summary">
+      <p><strong>Deine Bilanz:</strong> 1, 4, 7a und 9 richtig. 5, 6, 8 und 10 waren neu für dich, die sind unten ausführlich erklärt.</p>
+      <ul>
+        <li><strong>Hauptfehler, zum zweiten Mal:</strong> das Vorzeichen bei \(-4ac\), wenn \(c\) negativ ist (Aufgabe 2).</li>
+        <li><strong>Wurzelgleichungen:</strong> zuerst prüfen, für welche \(x\) die Wurzeln überhaupt existieren (Aufgabe 3).</li>
+        <li><strong>\(D = 0\)</strong> heisst nur „Ausdruck gleich null setzen“, nicht Wurzel ziehen (Aufgabe 7b).</li>
+      </ul>
+    </div>
+
+    <article class="sol">
+      <h3><span class="n">1</span> Substitution <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = −2; 4; −1; 3</span></p>
+      <ol class="steps">
+        <li>Setze \(u = x^2 - 2x\): \(\;u^2 - 11u + 24 = 0\), Vieta ergibt \(u = 3\) oder \(u = 8\).</li>
+        <li>\(x^2 - 2x = 3 \Rightarrow x^2 - 2x - 3 = 0 \Rightarrow x = 3,\ x = -1\)</li>
+        <li>\(x^2 - 2x = 8 \Rightarrow x^2 - 2x - 8 = 0 \Rightarrow x = 4,\ x = -2\)</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{-2;\ -1;\ 3;\ 4\}\)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">2</span> Bruchgleichung <span class="chip bad">falsch</span></h3>
+      <p class="yours">Deine Antwort: <span>L = { }, D negativ (etwa −47)</span></p>
+      <p>Dein Ansatz bis \(2x^2 - x - 6 = 0\) war richtig. Der Fehler liegt in \(D\):</p>
+      <div class="formula">\[ D = (-1)^2 - 4\cdot 2\cdot(-6) = 1 + 48 = 49 \]</div>
+      <ol class="steps">
+        <li><strong>Verbotene Werte zuerst:</strong> \(x \neq 2\) und \(x \neq -2\), weil sonst ein Nenner null wird.</li>
+        <li><strong>Hauptnenner</strong> ist \((x-2)(x+2) = x^2 - 4\). Mit ihm multiplizieren: \(\;3(x+2) + 2x(x-2) = 12\)</li>
+        <li>Ausmultiplizieren und ordnen: \(\;3x + 6 + 2x^2 - 4x - 12 = 0 \Rightarrow 2x^2 - x - 6 = 0\)</li>
+        <li>\(D = 49\), also \(\;x = \dfrac{1 \pm 7}{4}\;\Rightarrow\; x = 2\ \text{oder}\ x = -\tfrac{3}{2}\)</li>
+        <li>\(x = 2\) ist verboten und fällt weg.</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{-\tfrac{3}{2}\}\)</p>
+      <p><strong>Faktorisieren mit \(a \neq 1\):</strong> Es geht, ist aber mühsam: \(2x^2 - x - 6 = (2x + 3)(x - 2)\). Steht vor \(x^2\) keine 1, nimm direkt die Mitternachtsformel.</p>
+      <p class="tip"><strong>Merke:</strong> Ist \(c\) negativ, wird \(-4ac\) positiv. Schreib die Klammer immer aus: \(-4\cdot 2\cdot(-6)\), nie im Kopf.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">3</span> Wurzelgleichung <span class="chip bad">falsch</span></h3>
+      <p class="yours">Deine Antwort: <span>L = {1}</span></p>
+      <p>\(x = 1\) kann nicht stimmen: \(\sqrt{1-4} = \sqrt{-3}\) existiert nicht. Beide Wurzeln brauchen einen Inhalt \(\ge 0\), also muss \(x \ge 4\) sein.</p>
+      <p>Der häufigste Fehler hier: \((\sqrt{a} - \sqrt{b})^2\) ist <em>nicht</em> \(a - b\). Darum isolierst du zuerst eine Wurzel.</p>
+      <ol class="steps">
+        <li><strong>Eine Wurzel allein stellen:</strong> \(\;\sqrt{2x-1} = 2 + \sqrt{x-4}\)</li>
+        <li><strong>Quadrieren</strong>, rechts mit dem Binom \((a+b)^2 = a^2 + 2ab + b^2\): \(\;2x - 1 = 4 + 4\sqrt{x-4} + (x - 4)\)</li>
+        <li><strong>Die verbliebene Wurzel allein stellen:</strong> \(\;x - 1 = 4\sqrt{x-4}\)</li>
+        <li><strong>Nochmals quadrieren:</strong> \(\;x^2 - 2x + 1 = 16(x - 4) = 16x - 64\)</li>
+        <li>Ordnen: \(\;x^2 - 18x + 65 = 0\). Vieta: Produkt 65, Summe 18, also \(x = 5\) oder \(x = 13\).</li>
+        <li><strong>Probe:</strong> \(x = 5\): \(\sqrt{9} - \sqrt{1} = 3 - 1 = 2\) ✓ · \(x = 13\): \(\sqrt{25} - \sqrt{9} = 5 - 3 = 2\) ✓</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{5;\ 13\}\)</p>
+      <p class="tip"><strong>Merke:</strong> Bei Wurzelgleichungen zuerst den erlaubten Bereich bestimmen, dann je eine Wurzel isolieren und quadrieren, am Ende immer die Probe.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">4</span> Vieta mit Bedingung <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>q = 8, x = 2 und x = 4</span></p>
+      <p>Dein Vorzeichen-Denken war gut. So kommst du rechnerisch hin:</p>
+      <ol class="steps">
+        <li><strong>Bedingung als Ansatz:</strong> \(x_1 = t\), \(x_2 = 2t\)</li>
+        <li><strong>Summe nach Vieta:</strong> \(\;t + 2t = 6 \Rightarrow 3t = 6 \Rightarrow t = 2\), also \(x_1 = 2\), \(x_2 = 4\)</li>
+        <li><strong>Produkt nach Vieta:</strong> \(\;q = x_1 \cdot x_2 = 2 \cdot 4 = 8\)</li>
+      </ol>
+      <p class="tip"><strong>Merke:</strong> Steht eine Beziehung zwischen den Lösungen in der Aufgabe, schreib sie mit einer neuen Variable \(t\) hin und setz sie in die Vieta-Gleichungen ein.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">5</span> Vieta ohne Lösen <span class="chip open">erklärt</span></h3>
+      <p><strong>Die Idee:</strong> Du kennst Summe und Produkt, ohne die Lösungen selbst zu kennen. Für \(x^2 + 3x - 5 = 0\):</p>
+      <div class="formula">\[ s = x_1 + x_2 = -3 \qquad p = x_1 \cdot x_2 = -5 \]</div>
+      <p>Jeder Ausdruck, bei dem man \(x_1\) und \(x_2\) vertauschen kann, ohne dass er sich ändert, lässt sich nur mit \(s\) und \(p\) schreiben. Die Aufgabe ist also: umformen, bis nur noch \(x_1 + x_2\) und \(x_1 x_2\) vorkommen.</p>
+      <p><strong>a)</strong> Gleichnamig machen:</p>
+      <div class="formula">\[ \frac{1}{x_1} + \frac{1}{x_2} = \frac{x_2 + x_1}{x_1 x_2} = \frac{s}{p} = \frac{-3}{-5} = \frac{3}{5} \]</div>
+      <p><strong>b)</strong> Starte mit \(s^3\) und multipliziere aus:</p>
+      <div class="formula">\[ (x_1 + x_2)^3 = x_1^3 + 3x_1^2x_2 + 3x_1x_2^2 + x_2^3 = x_1^3 + x_2^3 + 3x_1x_2\,(x_1 + x_2) \]</div>
+      <p>Also ist \(x_1^3 + x_2^3 = s^3 - 3ps\):</p>
+      <div class="formula">\[ (-3)^3 - 3\cdot(-5)\cdot(-3) = -27 - 45 = -72 \]</div>
+      <p class="result">a) \(\tfrac{3}{5}\) · b) \(-72\)</p>
+      <div class="tablewrap">
+        <table class="t">
+          <thead><tr><th>Ausdruck</th><th>mit s und p</th></tr></thead>
+          <tbody>
+            <tr><td>\(x_1^2 + x_2^2\)</td><td>\(s^2 - 2p\)</td></tr>
+            <tr><td>\(\frac{1}{x_1} + \frac{1}{x_2}\)</td><td>\(s / p\)</td></tr>
+            <tr><td>\((x_1 - x_2)^2\)</td><td>\(s^2 - 4p\)</td></tr>
+            <tr><td>\(x_1^3 + x_2^3\)</td><td>\(s^3 - 3ps\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tip"><strong>Merke:</strong> Nicht auswendig lernen. Herleiten geht immer gleich: von \((x_1 + x_2)^n\) ausgehen und abziehen, was zu viel ist.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">6</span> Parameter und Diskriminante <span class="chip open">erklärt</span></h3>
+      <p><strong>Übersetzen:</strong> „Zwei verschiedene reelle Lösungen“ heisst \(D > 0\). Danach ist es eine Rechnung mit \(k\) statt mit Zahlen.</p>
+      <ol class="steps">
+        <li>Ablesen: \(a = 1\), \(b = k - 2\), \(c = k + 1\)</li>
+        <li>\(D = (k-2)^2 - 4\cdot 1\cdot(k+1) = k^2 - 4k + 4 - 4k - 4 = k^2 - 8k\)</li>
+        <li>Bedingung: \(\;k^2 - 8k > 0 \;\Rightarrow\; k\,(k - 8) > 0\)</li>
+        <li>Ein Produkt ist positiv, wenn beide Faktoren dasselbe Vorzeichen haben: beide positiv heisst \(k > 8\), beide negativ heisst \(k < 0\).</li>
+      </ol>
+      <p class="result">\(k < 0\) oder \(k > 8\)</p>
+      <figure class="fig">
+        <svg viewBox="0 0 440 230" role="img" aria-label="Parabel D von k gleich k Quadrat minus 8 k mit Nullstellen bei 0 und 8">
+          <line class="gr" x1="100" y1="10" x2="100" y2="215"/>
+          <line class="gr" x1="340" y1="10" x2="340" y2="215"/>
+          <line class="ax" x1="30" y1="120" x2="420" y2="120"/>
+          <path class="curve" d="M40 20 Q220 380 400 20"/>
+          <line class="hl" x1="40" y1="120" x2="100" y2="120"/>
+          <line class="hl" x1="340" y1="120" x2="400" y2="120"/>
+          <line class="lo" x1="100" y1="120" x2="340" y2="120"/>
+          <text x="100" y="140" text-anchor="middle">0</text>
+          <text x="340" y="140" text-anchor="middle">8</text>
+          <text x="424" y="116" text-anchor="end">k</text>
+          <text class="lab" x="58" y="100" text-anchor="middle">D &gt; 0</text>
+          <text class="lab" x="382" y="100" text-anchor="middle">D &gt; 0</text>
+          <text class="lab" x="220" y="165" text-anchor="middle">D &lt; 0</text>
+        </svg>
+        <figcaption>\(D(k) = k^2 - 8k\) ist eine nach oben offene Parabel mit Nullstellen 0 und 8. Über der Achse, also \(D > 0\), liegt sie nur links von 0 und rechts von 8.</figcaption>
+      </figure>
+      <p><strong>Probe:</strong> Mit \(k = 10\) wird \(D = 100 - 80 = 20 > 0\) ✓. Mit \(k = 4\) wird \(D = 16 - 32 < 0\), also keine Lösung ✓.</p>
+      <p class="tip"><strong>Merke:</strong> Das ist eine quadratische Ungleichung. Nullstellen bestimmen, dann am Graphen ablesen, wo er über oder unter der Achse liegt. Kommt im Thema Ungleichungen nochmals ausführlich.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">7</span> Parabel und Gerade <span class="chip part">a richtig, b teilweise</span></h3>
+      <p class="yours">Deine Antwort: <span>a) (2|−3), (4|1) · b) x = 2</span></p>
+      <p><strong>a)</strong> Gleichsetzen: \(x^2 - 4x + 1 = 2x - 7 \Rightarrow x^2 - 6x + 8 = 0 \Rightarrow x = 2,\ x = 4\). Schnittpunkte \((2\,|\,-3)\) und \((4\,|\,1)\). Richtig.</p>
+      <p><strong>b)</strong> Dein Ansatz \(x^2 - mx + 4 = 0\) und \(D = 0\) war genau richtig. Nur: \(D = 0\) heisst, du setzt den Ausdruck für \(D\) gleich null. Du ziehst keine Wurzel aus \(D\).</p>
+      <ol class="steps">
+        <li>\(D = m^2 - 4\cdot 1\cdot 4 = m^2 - 16\)</li>
+        <li>\(m^2 - 16 = 0 \Rightarrow m^2 = 16 \Rightarrow m = 4\ \text{oder}\ m = -4\). Das ± nicht vergessen.</li>
+        <li>Gefragt war \(m\). Deine 2 ist die x-Koordinate des Berührpunkts für \(m = 4\): Bei \(D = 0\) gilt \(x = -\tfrac{b}{2a} = \tfrac{m}{2} = 2\), und \(y = 2^2 + 1 = 5\).</li>
+      </ol>
+      <p class="result">\(m = 4\) mit Berührpunkt \((2\,|\,5)\) und \(m = -4\) mit Berührpunkt \((-2\,|\,5)\)</p>
+      <figure class="fig">
+        <svg viewBox="0 0 400 260" role="img" aria-label="Parabel y gleich x Quadrat plus 1 mit zwei Tangenten durch den Punkt 0 minus 3">
+          <line class="ax" x1="20" y1="185" x2="385" y2="185"/>
+          <line class="ax" x1="200" y1="10" x2="200" y2="250"/>
+          <path class="curve" d="M45 25.85 Q200 314.15 355 25.85"/>
+          <line class="tan" x1="200" y1="230" x2="350" y2="50"/>
+          <line class="tan" x1="200" y1="230" x2="50" y2="50"/>
+          <line class="miss" x1="200" y1="230" x2="350" y2="140"/>
+          <circle class="dot" cx="300" cy="110" r="5"/>
+          <circle class="dot" cx="100" cy="110" r="5"/>
+          <circle class="dot2" cx="200" cy="230" r="4"/>
+          <text class="lab" x="312" y="114">(2|5)</text>
+          <text class="lab" x="88" y="114" text-anchor="end">(−2|5)</text>
+          <text x="208" y="246">(0|−3)</text>
+          <text class="lab" x="356" y="46">m = 4</text>
+          <text class="lab" x="44" y="46" text-anchor="end">m = −4</text>
+          <text x="356" y="150">m = 2</text>
+          <text x="388" y="180" text-anchor="end">x</text>
+          <text x="206" y="20">y</text>
+        </svg>
+        <figcaption>Alle Geraden \(y = mx - 3\) gehen durch \((0\,|\,-3)\). Nur bei \(m = \pm 4\) berühren sie die Parabel. Die gestrichelte Gerade mit \(m = 2\) trifft sie gar nicht, dort ist \(D < 0\).</figcaption>
+      </figure>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">8</span> Textaufgabe Pumpen <span class="chip open">erklärt</span></h3>
+      <p><strong>Rezept für jede Textaufgabe:</strong></p>
+      <ol class="steps">
+        <li><strong>Unbekannte festlegen</strong>, mit Einheit: „\(t\) = Zeit der grossen Pumpe allein, in Stunden“.</li>
+        <li><strong>Alles andere durch \(t\) ausdrücken:</strong> kleine Pumpe \(t + 5\).</li>
+        <li><strong>Die Beziehung finden</strong>, die den Satz zur Gleichung macht. Oft hilft eine Tabelle.</li>
+        <li><strong>Gleichung lösen.</strong></li>
+        <li><strong>Sinn prüfen:</strong> negative Zeiten, Längen oder Geschwindigkeiten streichen.</li>
+        <li><strong>Antwortsatz</strong> mit Einheit, dann Probe am Text.</li>
+      </ol>
+      <p><strong>Der Trick bei Arbeitsaufgaben:</strong> Zeiten addieren sich nicht, Leistungen schon. Leistung heisst hier: welcher Teil des Beckens pro Stunde gefüllt wird, also \(\tfrac{1}{\text{Zeit}}\).</p>
+      <div class="tablewrap">
+        <table class="t">
+          <thead><tr><th>Pumpe</th><th>Zeit allein</th><th>Teil pro Stunde</th></tr></thead>
+          <tbody>
+            <tr><td>gross</td><td>\(t\)</td><td>\(\frac{1}{t}\)</td></tr>
+            <tr><td>klein</td><td>\(t + 5\)</td><td>\(\frac{1}{t+5}\)</td></tr>
+            <tr><td>zusammen</td><td>6</td><td>\(\frac{1}{6}\)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="steps">
+        <li>Leistungen addieren: \(\;\dfrac{1}{t} + \dfrac{1}{t+5} = \dfrac{1}{6}\)</li>
+        <li>Mit \(6t(t+5)\) multiplizieren: \(\;6(t+5) + 6t = t(t+5)\)</li>
+        <li>Ordnen: \(\;12t + 30 = t^2 + 5t \Rightarrow t^2 - 7t - 30 = 0 \Rightarrow (t - 10)(t + 3) = 0\)</li>
+        <li>\(t = -3\) ist als Zeit sinnlos, also \(t = 10\).</li>
+        <li>Probe: \(\tfrac{1}{10} + \tfrac{1}{15} = \tfrac{3}{30} + \tfrac{2}{30} = \tfrac{1}{6}\) ✓</li>
+      </ol>
+      <p class="result">Die grosse Pumpe braucht allein 10 Stunden, die kleine 15 Stunden.</p>
+      <p class="tip"><strong>Typischer Fehler:</strong> \(t + (t + 5) = 6\). Das würde heissen, dass zwei Pumpen zusammen <em>länger</em> brauchen als jede allein.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">9</span> Dreieck <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>5 und 12</span></p>
+      <p>Mit \(a + b = 30 - 13 = 17\) und Pythagoras \(a^2 + b^2 = 169\): Aus \((a+b)^2 - 2ab = 169\) folgt \(289 - 2ab = 169\), also \(ab = 60\). Vieta gibt 5 und 12. Das ist derselbe Trick wie in Aufgabe 5.</p>
+      <p class="result">Die Katheten sind 5 cm und 12 cm lang.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">10</span> Exponentialgleichung <span class="chip open">erklärt</span></h3>
+      <p>Ja, Exponentialgleichungen sind ein eigenes Thema und kommen später. Diese hier ist aber eine versteckte quadratische Gleichung, und nur darum ging es.</p>
+      <ol class="steps">
+        <li>Potenzregeln: \(\;2^{2x+1} = 2 \cdot 2^{2x} = 2\cdot(2^x)^2\)</li>
+        <li>Setze \(u = 2^x\) (das ist immer positiv): \(\;2u^2 - 9u + 4 = 0\)</li>
+        <li>\(D = 81 - 32 = 49\), also \(\;u = \dfrac{9 \pm 7}{4}\;\Rightarrow\; u = 4\ \text{oder}\ u = \tfrac{1}{2}\)</li>
+        <li>Zurück zu \(x\): \(2^x = 4 = 2^2 \Rightarrow x = 2\), und \(2^x = \tfrac{1}{2} = 2^{-1} \Rightarrow x = -1\)</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{-1;\ 2\}\)</p>
+    </article>
   </section>
 </main>
 
