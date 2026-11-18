@@ -419,7 +419,207 @@ table.t th { font-family: var(--f-mono); font-size: 12px; font-weight: 500; colo
 
   <section class="panel solutions" aria-labelledby="sol-h">
     <h2 id="sol-h">Lösungen und Erklärungen</h2>
-    <p>Kommen hierhin, sobald du mir deine Antworten im Chat geschickt hast.</p>
+
+    <div class="summary">
+      <p><strong>Deine Bilanz:</strong> 10 ganz richtig (1, 4, 5, 6, 7, 9, 10, 12, 14, 20). Bei 11 stimmt das Ergebnis, aber der Weg nicht. 5 teilweise (2, 3, 8, 16, 17), 4 offen oder falsch (13, 15, 18, 19).</p>
+      <ul>
+        <li><strong>Lösungen verloren</strong> (2, 3, 8, 16, 17): \(\pm\) vergessen, zweiter Fall vergessen, durch \(\lg x\) geteilt. Das ist dein grösster Punktverlust.</li>
+        <li><strong>Exponenten</strong> (10, 11, 12): Bei Produkten werden Exponenten addiert. Bei Summen darf man sie nicht vergleichen.</li>
+        <li><strong>Logarithmus-Basen</strong> (13, 15, 19): Basiswechsel richtig herum anwenden.</li>
+        <li><strong>Raten und Horner</strong> (18): Zuerst prüfen, ob die geratene Zahl wirklich eine Lösung ist.</li>
+      </ul>
+    </div>
+
+    <article class="sol">
+      <h3><span class="n">1</span> Quadratisch mit Brüchen <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>3 − √17 / 4 ; 3 + √17 / 4</span></p>
+      <p>Mal 6: \(2x^2 - 3x - 1 = 0\), \(D = 9 + 8 = 17\). Schreib den Bruchstrich unter den ganzen Zähler, mit Klammer: \(x = \dfrac{3 \pm \sqrt{17}}{4}\). So wie du es notiert hast, würde nur \(\sqrt{17}\) durch 4 geteilt.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">2</span> Vieta mit Bedingung <span class="chip part">teilweise</span></h3>
+      <p class="yours">Deine Antwort: <span>p = 7, Lösungen 3 und 4</span></p>
+      <p>Dein Ansatz war richtig. Zwei Dinge fehlen:</p>
+      <ol class="steps">
+        <li><strong>\(t^2 + t = 12\) ist eine quadratische Gleichung</strong>, die du lösen kannst: \(t^2 + t - 12 = 0 \Rightarrow (t + 4)(t - 3) = 0\), also \(t = 3\) <em>oder</em> \(t = -4\).</li>
+        <li><strong>Vorzeichen bei Vieta:</strong> \(x_1 + x_2 = -p\). Für 3 und 4 ist die Summe 7, also \(p = -7\), nicht \(+7\).</li>
+        <li>\(t = 3\): Lösungen 3 und 4, \(p = -7\). \(t = -4\): Lösungen \(-4\) und \(-3\), \(p = 7\).</li>
+      </ol>
+      <p class="result">\(p = -7\) (Lösungen 3, 4) oder \(p = 7\) (Lösungen −4, −3)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">3</span> Parameter vor x² <span class="chip part">teilweise</span></h3>
+      <p class="yours">Deine Antwort: <span>a = 2</span></p>
+      <ol class="steps">
+        <li>\(a^2 = 4\) hat zwei Lösungen: \(a = 2\) <em>und</em> \(a = -2\).</li>
+        <li>Fall \(a = 0\) separat prüfen: Dann bleibt \(4x = 0\), also genau eine Lösung \(x = 0\).</li>
+      </ol>
+      <p class="result">\(a \in \{-2;\ 0;\ 2\}\)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">4</span> Bruch <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>1/2 ; 3</span></p>
+      <p>\(3(x-2) + 3x = 4x(x-2) \Rightarrow 2x^2 - 7x + 3 = 0\). Beide Lösungen sind erlaubt.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">5</span> Bruch mit Faktorisieren <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 9/2</span></p>
+      <p>\(x^2 - 4x = x(x-4)\) ist der Hauptnenner. \(5 - x = x - 4 \Rightarrow x = \tfrac{9}{2}\).</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">6</span> Zwei Wurzeln <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 9</span></p>
+      <p>Probe: \(\sqrt{16} - \sqrt{9} = 1\) ✓</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">7</span> Wurzel <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>0 geht nicht, L = {5}</span></p>
+      <p>Der Grund für die 0: \(\sqrt{1} + 1 = 2 \neq 0\). Schreib die Probe an der Prüfung immer hin.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">8</span> Betrag mit x² <span class="chip part">teilweise</span></h3>
+      <p class="yours">Deine Antwort: <span>L = {1, 3}</span></p>
+      <p>Die Fälle hast du richtig gemacht: \(x^2 = 9\) und \(x^2 = 1\). Aber \(x^2 = 9\) hat zwei Lösungen.</p>
+      <p class="result">\(\mathbb{L} = \{-3;\ -1;\ 1;\ 3\}\)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">9</span> Zwei Beträge <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>L = {−5, −1}</span></p>
+      <p>Abkürzung für später: \(|A| = |B| \iff A = B\ \text{oder}\ A = -B\).</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">10</span> Exponential, gleiche Basis <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = −5/3</span></p>
+      <p><strong>Zu deiner Frage:</strong> Im zweiten Weg hast du die Exponenten <em>multipliziert</em>. Bei einem Produkt gleicher Basen werden sie aber <em>addiert</em>:</p>
+      <div class="formula">\[ 2^{x}\cdot 2^{2(x+1)} = 2^{\,x + 2(x+1)} = 2^{3x+2} \qquad\text{nicht}\qquad 2^{\,x\cdot 2(x+1)} \]</div>
+      <div class="tablewrap">
+        <table class="t">
+          <thead><tr><th>Situation</th><th>Exponenten</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td>Produkt \(a^m\cdot a^n\)</td><td>addieren</td><td>\(2^3\cdot 2^2 = 2^5\)</td></tr>
+            <tr><td>Potenz einer Potenz \((a^m)^n\)</td><td>multiplizieren</td><td>\((2^3)^2 = 2^6\)</td></tr>
+            <tr><td>Summe \(a^m + a^n\)</td><td>nichts zusammenfassen</td><td>\(2^3 + 2^2 = 12\), keine Zweierpotenz</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">11</span> Ausklammern bei Exponentialsummen <span class="chip part">Ergebnis richtig, Weg falsch</span></h3>
+      <p class="yours">Deine Antwort: <span>36 = 3³ + 3², also x + 1 + x = 3 + 2</span></p>
+      <p>Das ging zufällig auf. Bei einer <em>Summe</em> darfst du keine Exponenten vergleichen. Bei rechts 20 statt 36 findest du keine passende Zerlegung, und die Methode bricht zusammen.</p>
+      <p><strong>Der sichere Weg:</strong> die kleinste Potenz ausklammern.</p>
+      <div class="formula">\[ 3^{x+1} + 3^x = 3^x\cdot 3 + 3^x = 3^x(3 + 1) = 4\cdot 3^x = 36 \;\Rightarrow\; 3^x = 9 \;\Rightarrow\; x = 2 \]</div>
+      <p>Bei \(= 20\) gäbe das \(3^x = 5\), also \(x = \tfrac{\lg 5}{\lg 3}\). Das funktioniert immer.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">12</span> Exponential mit Substitution <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 1 ; log₂6 ≈ 2.585</span></p>
+      <p>Der zweite Ansatz war richtig. Den ersten Ansatz verwirfst du aus demselben Grund wie bei 11: Bei Summen keine Exponenten vergleichen. Achte aufs Vorzeichen: \(-2^{x+3} = -8\cdot 2^x = -8u\), also \(u^2 - 8u + 12 = 0\) und nicht \(+8u\).</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">13</span> Verschiedene Basen <span class="chip open">erklärt</span></h3>
+      <p><strong>Wozu der Basiswechsel gut ist:</strong> Dein Rechner kennt nur \(\lg\) (Basis 10) und \(\ln\) (Basis \(e\)). Jeden anderen Logarithmus rechnest du so um:</p>
+      <div class="formula">\[ \log_a b = \frac{\lg b}{\lg a} \qquad \text{Merksatz: die Basis kommt nach unten} \]</div>
+      <p>Beispiel: \(\log_2 8 = \tfrac{\lg 8}{\lg 2} = \tfrac{0{,}903}{0{,}301} = 3\) ✓, denn \(2^3 = 8\).</p>
+      <p><strong>Hier brauchst du ihn gar nicht.</strong> Bei verschiedenen Basen nimmst du direkt auf beiden Seiten \(\lg\) und holst die Exponenten nach vorn:</p>
+      <ol class="steps">
+        <li>\(\lg\big(5\cdot 2^{x-1}\big) = \lg\big(3^{x+1}\big)\)</li>
+        <li>Produktregel und Potenzregel: \(\;\lg 5 + (x - 1)\lg 2 = (x + 1)\lg 3\)</li>
+        <li>Ausmultiplizieren, alle \(x\) nach links: \(\;x\lg 2 - x\lg 3 = \lg 3 + \lg 2 - \lg 5\)</li>
+        <li>Ausklammern und teilen: \(\;x = \dfrac{\lg 3 + \lg 2 - \lg 5}{\lg 2 - \lg 3} = \dfrac{\lg 1{,}2}{\lg \tfrac{2}{3}}\)</li>
+      </ol>
+      <p class="result">\(x \approx -0{,}450\)</p>
+      <p class="tip"><strong>Merke:</strong> \(\lg\) auf beide Seiten, Exponent nach vorn. Danach ist es eine lineare Gleichung, bei der die \(\lg\)-Werte einfach Zahlen sind.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">14</span> Logarithmus <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>L = {2}</span></p>
+      <p>\(\tfrac{x+1}{x-1} = 3^1 \Rightarrow x = 2\), und \(2 > 1\) ist erlaubt.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">15</span> Zwei Log-Basen <span class="chip bad">falsch</span></h3>
+      <p class="yours">Deine Antwort: <span>x = −12</span></p>
+      <p>Zwei Fehler. Erstens: Mit dem Basiswechsel teilst du, du multiplizierst nicht.</p>
+      <div class="formula">\[ \log_4(x+6) = \frac{\log_2(x+6)}{\log_2 4} = \frac{\log_2(x+6)}{2} \]</div>
+      <p>Zweitens: \(2\log_2(x+6)\) ist \(\log_2\big((x+6)^2\big)\), nicht \(\log_2(2x + 12)\). Die Zahl vor dem Log wird zum Exponenten.</p>
+      <ol class="steps">
+        <li>\(\log_2 x = \tfrac{1}{2}\log_2(x+6)\;\Rightarrow\; 2\log_2 x = \log_2(x+6)\)</li>
+        <li>\(\log_2(x^2) = \log_2(x+6) \Rightarrow x^2 = x + 6 \Rightarrow x = 3\ \text{oder}\ x = -2\)</li>
+        <li>\(\log_2(-2)\) gibt es nicht, also fällt \(-2\) weg.</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{3\}\)</p>
+      <p>Prüfen kannst du so ein Ergebnis immer durch Einsetzen: Deine \(-12\) ergibt \(\log_2(-12)\), und das existiert nicht.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">16</span> Logarithmus, Teilen-Falle <span class="chip part">teilweise</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 100</span></p>
+      <p>Du hast durch \(\lg x\) geteilt, und genau dabei geht eine Lösung verloren (siehe Formelblatt, Umformen). Ausklammern:</p>
+      <div class="formula">\[ (\lg x)^2 - 2\lg x = 0 \;\Rightarrow\; \lg x\,(\lg x - 2) = 0 \;\Rightarrow\; \lg x = 0\ \text{oder}\ \lg x = 2 \]</div>
+      <p class="result">\(x = 1\) oder \(x = 100\)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">17</span> Biquadratisch <span class="chip part">teilweise</span></h3>
+      <p class="yours">Deine Antwort: <span>x = √(1/2)</span></p>
+      <p>Die Substitution war richtig. Aber \(x^2 = \tfrac{1}{2}\) hat zwei Lösungen. Schöner geschrieben: \(\sqrt{\tfrac{1}{2}} = \tfrac{1}{\sqrt 2} = \tfrac{\sqrt 2}{2}\).</p>
+      <p class="result">\(x = \pm\dfrac{\sqrt{2}}{2}\)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">18</span> Raten und Horner, System <span class="chip open">erklärt</span></h3>
+      <p>Mit \((x - 1)\) ging es nicht, weil \(x = 1\) gar keine Lösung ist: \(2 - 3 - 3 + 2 = -2 \neq 0\). Darum zuerst immer einsetzen und prüfen, dann erst teilen.</p>
+      <ol class="steps">
+        <li><strong>Kandidaten:</strong> Steht vor \(x^3\) eine Zahl, sind auch Brüche möglich: \(\tfrac{\text{Teiler der Zahl ohne } x}{\text{Teiler der Zahl vor } x^3}\). Hier: \(\pm 1, \pm 2, \pm\tfrac{1}{2}\).</li>
+        <li><strong>Einsetzen:</strong> \(x = -1\): \(-2 - 3 + 3 + 2 = 0\). Gefunden.</li>
+        <li><strong>Horner mit \(-1\):</strong> erste Zahl runterholen. Dann immer: mal \(-1\), in die nächste Spalte schreiben, addieren.</li>
+      </ol>
+      <div class="tablewrap">
+        <table class="t">
+          <thead><tr><th></th><th>x³</th><th>x²</th><th>x</th><th>Zahl</th></tr></thead>
+          <tbody>
+            <tr><td>Koeffizienten</td><td>2</td><td>−3</td><td>−3</td><td>2</td></tr>
+            <tr><td>+ (mal −1)</td><td></td><td>−2</td><td>5</td><td>−2</td></tr>
+            <tr><td><strong>Ergebnis</strong></td><td><strong>2</strong></td><td><strong>−5</strong></td><td><strong>2</strong></td><td><strong>0</strong> = Rest</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="steps" start="4">
+        <li>So rechnest du die Zeilen: \(2\) runter · \(2\cdot(-1) = -2\), \(-3 + (-2) = -5\) · \(-5\cdot(-1) = 5\), \(-3 + 5 = 2\) · \(2\cdot(-1) = -2\), \(2 + (-2) = 0\).</li>
+        <li>Rest 0 bestätigt die Lösung. Die letzte Zeile ist \(2x^2 - 5x + 2\).</li>
+        <li>\(D = 25 - 16 = 9\), also \(x = \tfrac{5 \pm 3}{4}\): \(x = 2\) oder \(x = \tfrac{1}{2}\).</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{-1;\ \tfrac{1}{2};\ 2\}\)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">19</span> Zinsen <span class="chip part">Ansatz richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>1.03^x = 2, log₁.₀₃(2) ≈ 0.025?</span></p>
+      <p>Bis \(x = \log_{1{,}03} 2\) ist alles richtig. Beim Basiswechsel hast du oben und unten vertauscht. Die Basis 1,03 kommt nach unten:</p>
+      <div class="formula">\[ x = \log_{1{,}03} 2 = \frac{\lg 2}{\lg 1{,}03} = \frac{0{,}30103}{0{,}01284} \approx 23{,}45 \]</div>
+      <p>Nach 23 Jahren ist es noch nicht ganz doppelt, also braucht es das 24. Jahr.</p>
+      <p class="result">Nach 24 Jahren hat sich das Kapital erstmals verdoppelt.</p>
+      <p class="tip"><strong>Plausibilität:</strong> Eine Verdoppelung nach 0,025 Jahren, also nach etwa 9 Tagen, kann bei 3 % Zins nicht stimmen. Solche Kontrollen fangen Fehler ab.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">20</span> Weg um das Beet <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>−18 und 2, also 2 m</span></p>
+      <p>\((20 + 2w)(12 + 2w) - 240 = 144 \Rightarrow w^2 + 16w - 36 = 0\). Die negative Lösung hast du richtig verworfen.</p>
+    </article>
   </section>
 </main>
 
