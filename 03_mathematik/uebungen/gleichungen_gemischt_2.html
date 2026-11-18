@@ -346,7 +346,174 @@ table.t th { font-family: var(--f-mono); font-size: 12px; font-weight: 500; colo
 
   <section class="panel solutions" aria-labelledby="sol-h">
     <h2 id="sol-h">Lösungen und Erklärungen</h2>
-    <p>Kommen hierhin, sobald du mir deine Antworten im Chat geschickt hast.</p>
+
+    <div class="summary">
+      <p><strong>Deine Bilanz:</strong> 1, 2, 4, 5, 7, 9, 10 und 12 richtig, also 8 von 12. Bei 11 war dein Ansatz richtig, nur der letzte Schritt fehlte.</p>
+      <ul>
+        <li><strong>Vorzeichen beim Rüberbringen</strong> (Aufgabe 6): Ein \(+x\) auf der linken Seite wird rechts zu \(-x\).</li>
+        <li><strong>Betrag</strong> (Aufgaben 3 und 8): Das \(\pm\) gehört zum Inhalt des Betrags, nicht zum Ergebnis.</li>
+      </ul>
+    </div>
+
+    <article class="sol">
+      <h3><span class="n">1</span> Exponential, gleiche Basis <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 5</span></p>
+      <p>Ja, genau so: Wenn links und rechts dieselbe Basis steht, sind die Potenzen nur gleich, wenn die Exponenten gleich sind. Das gilt, weil \(2^x\) jeden Wert nur einmal annimmt.</p>
+      <div class="formula">\[ 8^{x-1} = (2^3)^{x-1} = 2^{3x-3} \qquad 4^{x+1} = (2^2)^{x+1} = 2^{2x+2} \]</div>
+      <p>\(3x - 3 = 2x + 2 \Rightarrow x = 5\). Probe: \(8^4 = 4096 = 4^6\) ✓</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">2</span> Exponential mit Logarithmus <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>1.609</span></p>
+      <p>\(5^x = \tfrac{40}{3} \Rightarrow x = \dfrac{\lg(40/3)}{\lg 5} \approx 1{,}609\). Zuerst die Potenz allein stellen, dann logarithmieren.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">3</span> Betrag <span class="chip bad">falsch</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 5, −5</span></p>
+      <p>Der Betrag sagt: Der <em>Inhalt</em> \(2x - 3\) ist 7 oder −7. Das \(\pm\) kommt also vor dem Lösen, nicht danach.</p>
+      <ol class="steps">
+        <li>\(2x - 3 = 7 \Rightarrow 2x = 10 \Rightarrow x = 5\)</li>
+        <li>\(2x - 3 = -7 \Rightarrow 2x = -4 \Rightarrow x = -2\)</li>
+        <li>Probe mit deiner \(-5\): \(|2\cdot(-5) - 3| = |-13| = 13 \neq 7\). Mit \(-2\): \(|-7| = 7\) ✓</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{-2;\ 5\}\)</p>
+      <p class="tip"><strong>Merke:</strong> \(|x| = 7\) gibt \(x = \pm 7\). Aber \(|2x - 3| = 7\) gibt nicht „\(x = \pm\) irgendwas“, sondern zwei getrennte lineare Gleichungen.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">4</span> Höheren Grades, ausklammern <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 0; 2; 3</span></p>
+      <p>\(x(x^2 - 5x + 6) = x(x-2)(x-3) = 0\). Genau richtig: ausklammern statt durch \(x\) teilen, sonst wäre die 0 verloren.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">5</span> Logarithmus <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 5</span></p>
+      <p>\(x^2 - 9 = 2^4 = 16 \Rightarrow x = \pm 5\). Du hast \(-5\) richtig weggelassen: \(\log_2(-5 - 3)\) gibt es nicht, weil das Argument \(> 0\) sein muss (erlaubt ist \(x > 3\)). Schreib diesen Grund an der Prüfung hin, er gibt Punkte.</p>
+      <p class="result">\(\mathbb{L} = \{5\}\)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">6</span> Wurzel <span class="chip bad">falsch</span></h3>
+      <p class="yours">Deine Antwort: <span>L = { }, aus x² − 7x + 14 = 0</span></p>
+      <p>Bis \(x^2 - 8x + 16 = x + 2\) war alles richtig. Dann muss \(x + 2\) nach links, und zwar <em>beide</em> Teile mit Minus:</p>
+      <div class="formula">\[ x^2 - 8x - x + 16 - 2 = 0 \;\Rightarrow\; x^2 - 9x + 14 = 0 \]</div>
+      <ol class="steps">
+        <li>Vieta: Produkt 14, Summe 9, also \(x = 2\) oder \(x = 7\).</li>
+        <li>Probe \(x = 2\): \(2 - \sqrt{4} = 0 \neq 4\) ✗</li>
+        <li>Probe \(x = 7\): \(7 - \sqrt{9} = 4\) ✓</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{7\}\)</p>
+      <p class="tip"><strong>Merke:</strong> Beim Rüberbringen wechselt jeder Summand sein Vorzeichen. Schreib den Zwischenschritt hin, statt ihn im Kopf zu machen.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">7</span> Bruch <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 1 verboten, L = { }</span></p>
+      <p>\(2(x+1) - (x-1) = 4 \Rightarrow x + 3 = 4 \Rightarrow x = 1\). Verboten sind \(\pm 1\), also ist die Lösungsmenge leer. Genau richtig erkannt.</p>
+      <p class="result">\(\mathbb{L} = \{\,\}\)</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">8</span> Betrag mit x auf beiden Seiten <span class="chip open">erklärt</span></h3>
+      <p><strong>Was der Betrag macht:</strong> Er lässt eine Zahl, die schon positiv ist, in Ruhe und macht eine negative positiv:</p>
+      <div class="formula">\[ |T| = \begin{cases} T & \text{wenn } T \ge 0 \\ -T & \text{wenn } T < 0 \end{cases} \]</div>
+      <p>Weil du nicht weisst, ob \(x - 4\) positiv oder negativ ist, rechnest du beide Fälle getrennt. In jedem Fall verschwindet der Betrag.</p>
+      <ol class="steps">
+        <li><strong>Fall 1, \(x - 4 \ge 0\), also \(x \ge 4\):</strong> Betrag einfach weglassen. \(\;x - 4 = 2x + 1 \Rightarrow x = -5\). Aber \(-5\) ist nicht \(\ge 4\), passt also nicht zum Fall. Verwerfen.</li>
+        <li><strong>Fall 2, \(x - 4 < 0\), also \(x < 4\):</strong> Betrag wird zu \(-(x - 4) = 4 - x\). \(\;4 - x = 2x + 1 \Rightarrow 3 = 3x \Rightarrow x = 1\). \(1 < 4\) passt.</li>
+        <li><strong>Probe:</strong> \(|1 - 4| = 3\) und \(2\cdot 1 + 1 = 3\) ✓</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{1\}\)</p>
+      <figure class="fig">
+        <svg viewBox="0 0 420 250" role="img" aria-label="V-förmiger Graph von Betrag x minus 4 und Gerade 2x plus 1, die sich bei x gleich 1 schneiden">
+          <line class="ax" x1="30" y1="200" x2="410" y2="200"/>
+          <line class="ax" x1="120" y1="12" x2="120" y2="245"/>
+          <polyline class="curve" points="40,92 280,200 400,146"/>
+          <line class="tan" x1="60" y1="236" x2="300" y2="20"/>
+          <circle class="dot" cx="160" cy="146" r="5"/>
+          <text class="lab" x="168" y="140">(1|3)</text>
+          <text x="280" y="216" text-anchor="middle">4</text>
+          <text x="160" y="216" text-anchor="middle">1</text>
+          <text class="lab" x="330" y="138">y = |x − 4|</text>
+          <text class="lab" x="250" y="36">y = 2x + 1</text>
+          <text x="406" y="194" text-anchor="end">x</text>
+        </svg>
+        <figcaption>Der Betrag macht aus der Geraden \(y = x - 4\) ein V mit Knick bei \(x = 4\). Links vom Knick (Fall 2) trifft die Gerade das V bei \(x = 1\). Rechts vom Knick (Fall 1) gibt es keinen Schnittpunkt, darum fiel \(-5\) weg.</figcaption>
+      </figure>
+      <p class="tip"><strong>Abkürzung:</strong> Ein Betrag ist nie negativ, also muss \(2x + 1 \ge 0\) sein, das heisst \(x \ge -\tfrac{1}{2}\). Damit fällt \(-5\) sofort weg.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">9</span> Raten und Polynomdivision <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 1; 3; −2</span></p>
+      <p><strong>Das Prinzip:</strong> Ist \(x_1\) eine Lösung, dann lässt sich das Polynom als \((x - x_1)\cdot(\text{Rest})\) schreiben. Der Rest hat einen Grad weniger. Aus einer kubischen Gleichung wird so eine quadratische, und die kannst du.</p>
+      <ol class="steps">
+        <li><strong>Raten:</strong> Ganze Lösungen sind immer Teiler der Zahl ohne \(x\), hier 6. Kandidaten: \(\pm1, \pm2, \pm3, \pm6\). Einsetzen: \(1 - 2 - 5 + 6 = 0\), also ist \(x = 1\) eine Lösung.</li>
+        <li><strong>Teilen</strong> durch \((x - 1)\). Am schnellsten mit dem Horner-Schema: Koeffizienten hinschreiben, die erste runterholen, mal 1 rechnen, zur nächsten addieren.</li>
+      </ol>
+      <div class="tablewrap">
+        <table class="t">
+          <thead><tr><th></th><th>x³</th><th>x²</th><th>x</th><th>Zahl</th></tr></thead>
+          <tbody>
+            <tr><td>Koeffizienten</td><td>1</td><td>−2</td><td>−5</td><td>6</td></tr>
+            <tr><td>+ (mal 1)</td><td></td><td>1</td><td>−1</td><td>−6</td></tr>
+            <tr><td><strong>Ergebnis</strong></td><td><strong>1</strong></td><td><strong>−1</strong></td><td><strong>−6</strong></td><td><strong>0</strong> = Rest</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ol class="steps" start="3">
+        <li>Die letzte Zeile liest du als \(x^2 - x - 6\). Rest 0 bestätigt, dass \(x = 1\) stimmt.</li>
+        <li>\(x^2 - x - 6 = (x - 3)(x + 2)\), also insgesamt \((x - 1)(x - 3)(x + 2) = 0\).</li>
+      </ol>
+      <p class="result">\(\mathbb{L} = \{-2;\ 1;\ 3\}\)</p>
+      <figure class="fig">
+        <svg viewBox="0 0 440 250" role="img" aria-label="Graph des kubischen Polynoms mit Nullstellen bei minus 2, 1 und 3">
+          <defs><clipPath id="c9"><rect x="20" y="15" width="410" height="220"/></clipPath></defs>
+          <line class="ax" x1="20" y1="125" x2="430" y2="125"/>
+          <line class="ax" x1="195" y1="15" x2="195" y2="235"/>
+          <polyline class="curve" clip-path="url(#c9)" points="30.0,365.0 32.7,348.3 35.5,332.1 38.2,316.4 41.0,301.3 43.7,286.7 46.5,272.6 49.2,259.0 52.0,246.0 54.7,233.4 57.5,221.3 60.2,209.6 63.0,198.4 65.7,187.7 68.5,177.5 71.2,167.7 74.0,158.3 76.7,149.3 79.5,140.8 82.2,132.7 85.0,125.0 87.7,117.7 90.5,110.8 93.2,104.3 96.0,98.1 98.7,92.3 101.5,86.9 104.2,81.9 107.0,77.2 109.7,72.8 112.5,68.8 115.2,65.0 118.0,61.6 120.7,58.6 123.5,55.8 126.2,53.3 129.0,51.1 131.7,49.2 134.5,47.5 137.2,46.1 140.0,45.0 142.7,44.1 145.5,43.5 148.2,43.1 151.0,42.9 153.7,43.0 156.5,43.2 159.2,43.7 162.0,44.4 164.7,45.2 167.5,46.2 170.2,47.5 173.0,48.8 175.7,50.4 178.5,52.1 181.2,53.9 184.0,55.9 186.7,58.0 189.5,60.2 192.2,62.6 195.0,65.0 197.7,67.5 200.5,70.2 203.2,72.9 206.0,75.7 208.7,78.6 211.5,81.5 214.2,84.5 217.0,87.6 219.7,90.6 222.5,93.7 225.2,96.9 228.0,100.0 230.7,103.2 233.5,106.4 236.2,109.5 239.0,112.7 241.7,115.8 244.5,118.9 247.2,122.0 250.0,125.0 252.7,128.0 255.5,130.9 258.2,133.7 261.0,136.5 263.7,139.2 266.5,141.8 269.2,144.3 272.0,146.8 274.7,149.1 277.5,151.2 280.2,153.3 283.0,155.2 285.7,157.0 288.5,158.7 291.2,160.2 294.0,161.5 296.7,162.6 299.5,163.6 302.2,164.4 305.0,165.0 307.7,165.4 310.5,165.6 313.2,165.6 316.0,165.3 318.7,164.8 321.5,164.1 324.2,163.2 327.0,162.0 329.7,160.5 332.5,158.8 335.2,156.7 338.0,154.4 340.7,151.9 343.5,149.0 346.2,145.8 349.0,142.3 351.7,138.5 354.5,134.3 357.2,129.8 360.0,125.0 362.7,119.8 365.5,114.3 368.2,108.4 371.0,102.1 373.7,95.5 376.5,88.4 379.2,81.0 382.0,73.2 384.7,64.9 387.5,56.3 390.2,47.2 393.0,37.6 395.7,27.7 398.5,17.3 401.2,6.4 404.0,-4.9 406.7,-16.7 409.5,-29.0 412.2,-41.7 415.0,-55.0"/>
+          <circle class="dot" cx="85" cy="125" r="5"/>
+          <circle class="dot" cx="250" cy="125" r="5"/>
+          <circle class="dot" cx="360" cy="125" r="5"/>
+          <text x="85" y="145" text-anchor="middle">−2</text>
+          <text x="250" y="145" text-anchor="middle">1</text>
+          <text x="360" y="145" text-anchor="middle">3</text>
+          <text x="426" y="119" text-anchor="end">x</text>
+        </svg>
+        <figcaption>\(y = x^3 - 2x^2 - 5x + 6\) schneidet die x-Achse dreimal. Jede Nullstelle ist ein Faktor \((x - x_i)\).</figcaption>
+      </figure>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">10</span> Exponential mit Substitution <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 0; 2</span></p>
+      <p>\(u = 3^x\): \(\;u^2 - 10u + 9 = 0 \Rightarrow u = 1\) oder \(u = 9\), also \(x = 0\) oder \(x = 2\).</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">11</span> Verschiedene Basen <span class="chip part">Ansatz richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>log₂(3^x) = x + 1</span></p>
+      <p>Dein Schritt stimmt: Du hast \(\log_2\) auf beide Seiten angewendet. Jetzt die Potenzregel des Logarithmus: Der Exponent darf vor den Log.</p>
+      <div class="formula">\[ \log_2(3^x) = x\cdot\log_2 3 \quad\Rightarrow\quad x\cdot\log_2 3 = x + 1 \]</div>
+      <ol class="steps">
+        <li>Alle \(x\) auf eine Seite und ausklammern: \(\;x\log_2 3 - x = 1 \Rightarrow x(\log_2 3 - 1) = 1\)</li>
+        <li>Teilen: \(\;x = \dfrac{1}{\log_2 3 - 1}\)</li>
+        <li>Rechner mit Basiswechsel: \(\log_2 3 = \tfrac{\lg 3}{\lg 2} \approx 1{,}585\), also \(x \approx \tfrac{1}{0{,}585} \approx 1{,}710\)</li>
+      </ol>
+      <p><strong>Standardweg:</strong> Auf beiden Seiten \(\lg\) nehmen, das funktioniert immer:</p>
+      <div class="formula">\[ (x+1)\lg 2 = x\lg 3 \;\Rightarrow\; x(\lg 3 - \lg 2) = \lg 2 \;\Rightarrow\; x = \frac{\lg 2}{\lg 3 - \lg 2} = \frac{\lg 2}{\lg 1{,}5} \approx 1{,}710 \]</div>
+      <p class="result">\(x = \dfrac{\lg 2}{\lg 1{,}5} \approx 1{,}710\)</p>
+      <p class="tip"><strong>Merke:</strong> Unbekannte im Exponenten und keine gemeinsame Basis: logarithmieren, Exponent nach vorn holen, dann ist es eine lineare Gleichung.</p>
+    </article>
+
+    <article class="sol">
+      <h3><span class="n">12</span> Logarithmus mit Substitution <span class="chip ok">richtig</span></h3>
+      <p class="yours">Deine Antwort: <span>x = 10000; 1/10</span></p>
+      <p>\(\lg(x^3) = 3\lg x\), mit \(u = \lg x\): \(\;u^2 - 3u - 4 = 0 \Rightarrow u = 4\) oder \(u = -1\), also \(x = 10^4\) oder \(x = 10^{-1}\). Beide sind \(> 0\), also erlaubt.</p>
+    </article>
   </section>
 </main>
 
