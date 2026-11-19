@@ -37,3 +37,22 @@ Fill in yourself. Topics are listed in each subject's `topics.md`.
 | | | | | |
 | | | | | |
 | 14 Feb 2027 | all written content done, past papers practised | | | |
+
+## Entscheid (19.11.2026)
+
+Ganze Prüfung in der Wintersession 2027. Budget ≈ 35 h pro Woche bis 14.02.2027.
+
+| Fach | h pro Woche (Richtwert) | offen total |
+|---|---|---|
+| Naturwissenschaften | 13 | ≈ 163 |
+| Mathematik | 8 | ≈ 98 |
+| Geschichte / Geografie | 6.5 | ≈ 83 |
+| Deutsch | 3.5 | ≈ 45 |
+| Englisch | 3.5 | ≈ 41 |
+| **Total** | **≈ 35** | **≈ 430** |
+
+Bücher sofort besorgen, Lesen braucht Kalenderzeit:
+- [ ] Bühler: Verschiebung im Gestein
+- [ ] Dürrenmatt: Der Besuch der alten Dame
+- [ ] Storm: Der Schimmelreiter
+- [ ] Englisch: 3 Werke von 3 Autoren aus der Liste wählen und bestellen
