@@ -2,18 +2,21 @@
 
 Stand: **Sa 21.11.2026, 18:20** · Woche 1 des Wochenplans · 86 Tage bis zur ersten schriftlichen Prüfung (15.2.2027)
 
-## Jetzt dran
+## Jetzt dran (Sa 21.11., 18:30)
 
-- **Chemie 1 erledigt** (21.11.). Lücken für Lernkarten: Milch/Nebel heterogen, Wasser = Verbindung, Resublimieren,
-  Kondensieren setzt Energie frei. Nächstes Chemie-Thema: **Atombau, Periodensystem** (So 22.11.).
-- Mathe: Gleichungen abgeschlossen (3 Basiswechsel-Aufgaben nicht abgegeben). Nächstes: **Ungleichungen** (So 22.11.).
-- **Rückstand** wegen Notfall bei der Arbeit: Fr 20.11. ganz ausgefallen, Sa 21.11. nur Chemie-Antworten.
-  Offen aus Fr/Sa: Biologie Zellbiologie 2 h, Geschichte Aufklärung 1 h, Englisch Grammatik 1 h,
-  Physik Grössen/Einheiten 2 h, Geografie Geologie 1,5 h, Deutsch Epochen 1 h (≈ 8,5 h).
-  Frei geworden: Mathe-Gleichungen-Slots (Do–Sa, schon vorbei) und Chemie So 2 h.
-  Vorschlag an User: Sonntag-Chemie-Slot für Zellbiologie nutzen; Rest über die nächsten Tage verteilen;
-  Ende November entscheiden, ob der Plan neu gerechnet wird.
-- User lernt Begriffe mit eigenen Notizen auswendig (Stoffe, Übergänge, Gemischarten, Trennverfahren).
+Heute: Rückstand von Fr + Sa nachholen. Lektionen publiziert, Antworten des Users ausstehend:
+- Biologie 1 Zellbau (Teil 1 von 3): https://claude.ai/artifact/Byv8uU5Lt23GE8Y9Kpi9cj
+- Geschichte 1 Aufklärung, Revolution, Napoleon: https://claude.ai/artifact/YVXPaCaBCWDQFPZcWoMo1y
+- Physik 1 Grössen, Einheiten (kompakt, User stark): https://claude.ai/artifact/3wYzsU9B49Exx3WMSHbcyT
+- Geografie 1 Plattentektonik (Teil 1 von 2): https://claude.ai/artifact/AAMC6CuLqiUnz9cKe97j8u
+
+Entscheide 21.11.:
+- **Englisch gestrichen bis gegen Schluss**; Englisch-Slots im Plan = Puffer (Plan selbst bleibt unverändert).
+- **Deutsch Epochen und Gattungen** gilt mit dem Chat-Überblick vom 19.11. als erledigt; die restlichen
+  Epochen-Slots (Mo 23.11., Mi 25.11., Fr 27.11.) für Dürrenmatt (sobald Buch da) oder als Puffer nutzen.
+- So 22.11. bleibt wie geplant (Chemie-Slot 2 h ist frei, da Chemie 1 erledigt → Puffer).
+- Chemie 1 erledigt (21.11.). Mathe Gleichungen erledigt.
+
 - **Offene Frage an User:** Repo-Inhalt nach `main` übernehmen (PR oder direkter Push)? Noch keine Antwort.
 
 ## Stand pro Fach
@@ -22,12 +25,12 @@ Stand: **Sa 21.11.2026, 18:20** · Woche 1 des Wochenplans · 86 Tage bis zur er
 |---|---|---|---|
 | Mathematik | 1 Gleichungen | – | ≈ 7,5 h |
 | Chemie | 1 Stoffe, Teilchenmodell, Trennverfahren | – | ≈ 1,5 h (geschätzt) |
-| Biologie | – | – | 0 |
-| Physik | – | – | 0 |
-| Geschichte | – | – | 0 |
-| Geografie | – | – | 0 |
-| Deutsch | – | Epochen und Gattungen (Überblick erhalten) | ≈ 0,5 h |
-| Englisch | – | – | 0 |
+| Biologie | – | 1 Zellbiologie (Teil 1 Zellbau) | 0 |
+| Physik | – | 1 Grössen, Einheiten | 0 |
+| Geschichte | – | 1 Aufklärung, Revolution, Napoleon | 0 |
+| Geografie | – | 1 Geologie, Plattentektonik (Teil 1) | 0 |
+| Deutsch | Epochen und Gattungen (Überblick, 19.11.) | – | ≈ 0,5 h |
+| Englisch | – | bewusst erst gegen Schluss | 0 |
 
 ## Resultate
 
@@ -64,5 +67,5 @@ Zeiten Europe/Zurich, geschätzt aus Commit-Zeiten und `date` (Nachrichtenzeiten
 
 ## Abweichung zum Wochenplan
 
-Stand Sa 21.11. abends: ≈ 8,5 h Rückstand (Fr ausgefallen, Sa grösstenteils), teilweise kompensiert durch
-Chemie 1 (So-Slot 2 h frei). Netto ≈ 6,5 h hinter Plan; Puffer im Gesamtplan war ≈ 7 h.
+Stand Sa 21.11., 18:30: Offen aus Fr/Sa: Bio 2 h, Geschichte 1 h, Physik 2 h, Geografie 1,5 h (= 6,5 h; Lektionen bereit).
+Englisch 1 h gestrichen (Puffer), Deutsch Epochen 1 h als erledigt gezählt. Wenn der User heute alles schafft: im Plan.

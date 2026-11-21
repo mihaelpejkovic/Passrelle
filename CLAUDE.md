@@ -23,6 +23,9 @@ Es wird über viele Chats und Agenten hinweg genutzt. Lies diese Datei und **`FO
   Studienstart Oktober 2027 geht nur mit bestandener **ganzer** Prüfung im Winter 2027.
 - Entscheid vom 19.11.2026: **ganze Prüfung im Winter 2027, zweite Sprache Englisch.** „Nicht bestehen ist keine Option.“
 - Sonntags ab ca. 12 Uhr frei, darum Sonntag mehr Lernstunden.
+- **Englisch (Entscheid 21.11.):** User arbeitet auf Englisch, darum Englisch erst gegen Schluss.
+  Im Wochenplan bleiben die Englisch-Slots stehen, gelten aber als **Puffer** zum Nachholen anderer Fächer.
+- YouTube-Videos als Einstieg sind ok (v. a. Geschichte), danach Notizblock und Aufgaben.
 
 ## Prüfungsfakten (geprüft, Quellen in `00_admin/offizielle_dokumente/`)
 
@@ -60,6 +63,7 @@ Offizielle alte Prüfungen gibt es nur auf Anfrage beim SBFI (ohne Lösungen).
 - **Alle Lösungen vor dem Publizieren nachrechnen** (z. B. mit Python).
 - **Formelblätter als PDF** pro Fach/Thema (Vorlage: `03_mathematik/notizen/formelblatt_quelle.html`,
   Build: `npm install katex@0.16.11` im Build-Ordner, dann `node tools/pdf/make.js <html> <pdf>` mit Playwright).
+- **Lektionen bauen:** `tools/lesson/build.py` (`page()`, `task()`) erzeugt neue Notizblock-Seiten im gleichen Stil.
 - **Planung:** Der Wochenplan gibt pro Tag Fach, Thema und Stunden vor; **wann** am Tag, entscheidet der User.
   Generator: `tools/wochenplan/gen.py` (+ `plan.css`), Ausgabe `Wochenplan_Passerelle.pdf`.
   Bei Neuplanung: ab aktuellem Datum mit erledigtem Stand neu rechnen.
@@ -96,5 +100,9 @@ tools/                    logrechner.ps1, pdf/make.js, wochenplan/
 | Mathe gemischt Serie 2 | `03_mathematik/uebungen/gleichungen_gemischt_2.html` | https://claude.ai/artifact/HuXmB8seLtNLhesHBu9J1j |
 | Mathe Abschlusstest Gleichungen | `03_mathematik/uebungen/gleichungen_test_3.html` | https://claude.ai/artifact/Aqscedwc9xgjbXeStmiWAo |
 | Chemie 1: Stoffe, Teilchenmodell, Trennverfahren | `04_naturwissenschaften/chemie/uebungen/01_stoffe_teilchen_trennen.html` | https://claude.ai/artifact/ViVbzcZMYw3Erc3StJdKR3 |
+| Biologie 1: Zellbau (Teil 1 von 3) | `04_naturwissenschaften/biologie/uebungen/01_zellbiologie_zellbau.html` | https://claude.ai/artifact/Byv8uU5Lt23GE8Y9Kpi9cj |
+| Geschichte 1: Aufklärung, Revolution, Napoleon | `05_geistes_sozialwissenschaften/geschichte/uebungen/01_aufklaerung_revolution_napoleon.html` | https://claude.ai/artifact/YVXPaCaBCWDQFPZcWoMo1y |
+| Physik 1: Grössen, Einheiten, Messen | `04_naturwissenschaften/physik/uebungen/01_groessen_einheiten.html` | https://claude.ai/artifact/3wYzsU9B49Exx3WMSHbcyT |
+| Geografie 1: Erdaufbau, Plattentektonik (Teil 1 von 2) | `05_geistes_sozialwissenschaften/geografie/uebungen/01_geologie_plattentektonik.html` | https://claude.ai/artifact/AAMC6CuLqiUnz9cKe97j8u |
 
 Neue Artifacts hier und in `FORTSCHRITT.md` eintragen.

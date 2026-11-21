@@ -1,0 +1,442 @@
+<title>Zellbau</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' },
+    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+/* Layout: a single notebook page on Swiss Häuschenpapier (5 mm grid), red margin line on the left, tasks as entries down the page */
+:root {
+  --paper: #fbfcfe;
+  --grid: #dce6f1;
+  --ink: #1b2a45;
+  --muted: #56647c;
+  --accent: #1f4fa3;
+  --margin: #d4444c;
+  --field: #ffffff;
+  --line: #c6d2e1;
+  --chip: #e8eef8;
+  --ok: #2b7a4b;
+  --warn: #9a6200;
+  --bad: #c0392b;
+  --f-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --sq: 20px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141a25; --grid: #212b3a; --ink: #e2e8f2; --muted: #9eabc0; --accent: #93b4ff;
+    --margin: #e07079; --field: #1a2230; --line: #334156; --chip: #233049; --ok: #6fcf97; --warn: #f2b84b; --bad: #ff8a80; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141a25; --grid: #212b3a; --ink: #e2e8f2; --muted: #9eabc0; --accent: #93b4ff;
+  --margin: #e07079; --field: #1a2230; --line: #334156; --chip: #233049; --ok: #6fcf97; --warn: #f2b84b; --bad: #ff8a80; color-scheme: dark;
+}
+
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: var(--sq) var(--sq);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  border-left: 2px solid var(--margin);
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+header.top { display: flex; flex-direction: column; gap: 10px; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 14px;
+}
+h1 {
+  font-family: var(--f-hand); font-weight: 700; font-size: clamp(40px, 7vw, 56px); line-height: 1.05;
+  margin: 0; color: var(--accent); text-wrap: balance;
+}
+.lead { margin: 0; max-width: 62ch; color: var(--ink); }
+.note {
+  font-size: 14px; color: var(--muted); margin: 0; max-width: 62ch;
+}
+.note strong { color: var(--ink); font-weight: 600; }
+
+h2 {
+  font-family: var(--f-hand); font-weight: 700; font-size: 32px; margin: 0; color: var(--ink); line-height: 1.1;
+}
+
+.tasks { display: flex; flex-direction: column; gap: 28px; counter-reset: none; }
+.task {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 12px;
+  padding-bottom: 28px; border-bottom: 1px dashed var(--line);
+}
+.task:last-child { border-bottom: 0; padding-bottom: 0; }
+.num {
+  font-family: var(--f-hand); font-size: 36px; font-weight: 700; color: var(--margin); line-height: 1;
+  margin-left: -4px; padding-top: 2px;
+}
+.body { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.topic {
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; background: var(--chip); color: var(--ink);
+  padding: 2px 8px; border-radius: 4px;
+}
+.lvl { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.lvl b { color: var(--accent); font-weight: 500; }
+.q { margin: 0; max-width: 62ch; }
+.q p { margin: 0 0 6px; }
+.formula { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.parts { margin: 4px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+
+label.ans { font-family: var(--f-mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+textarea {
+  width: 100%; box-sizing: border-box; resize: vertical; min-height: 64px;
+  font-family: var(--f-hand); font-size: 22px; line-height: 1.3; color: var(--accent);
+  background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px;
+}
+textarea:focus-visible, input:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+.panel {
+  background: var(--field); border: 1px solid var(--line); border-radius: 8px; padding: 18px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.panel p { margin: 0; max-width: 62ch; }
+
+.lab-controls { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; }
+.lab-controls label { display: flex; flex-direction: column; gap: 4px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.lab-controls input[type="number"] {
+  width: 84px; font-family: var(--f-mono); font-size: 16px; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px;
+}
+.lab-controls .check { flex-direction: row; align-items: center; gap: 8px; font-size: 13px; color: var(--ink); }
+.readout {
+  font-family: var(--f-mono); font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.readout .tag { color: var(--accent); font-weight: 500; }
+.canvas-wrap { overflow-x: auto; }
+canvas { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 6px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+button {
+  font-family: var(--f-body); font-size: 15px; font-weight: 500; cursor: pointer;
+  background: var(--accent); color: var(--paper); border: 0; border-radius: 6px; padding: 10px 16px;
+}
+button.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+.status { font-size: 14px; color: var(--muted); }
+#copy-fallback { font-family: var(--f-mono); font-size: 13px; color: var(--ink); min-height: 120px; }
+
+.summary { display: flex; flex-direction: column; gap: 8px; }
+.summary ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; max-width: 62ch; }
+.sol { display: flex; flex-direction: column; gap: 10px; padding-top: 20px; border-top: 1px dashed var(--line); min-width: 0; }
+.sol h3 {
+  font-family: var(--f-hand); font-weight: 700; font-size: 28px; line-height: 1.1; margin: 0; color: var(--ink);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;
+}
+.sol h3 .n { color: var(--margin); }
+.chip { font-family: var(--f-mono); font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 4px; border: 1px solid currentColor; }
+.chip.ok { color: var(--ok); }
+.chip.part { color: var(--warn); }
+.chip.bad { color: var(--bad); }
+.chip.open { color: var(--muted); }
+.yours { margin: 0; font-size: 14px; color: var(--muted); }
+.yours span { font-family: var(--f-hand); font-size: 21px; color: var(--accent); }
+.sol p { margin: 0; max-width: 62ch; }
+.steps { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; max-width: 62ch; }
+.steps li { min-width: 0; }
+.result { font-weight: 600; }
+.tip {
+  margin: 0; max-width: 62ch; padding: 8px 12px; background: var(--chip);
+  border-left: 3px solid var(--margin); border-radius: 0 6px 6px 0; font-size: 15px;
+}
+.tip strong { color: var(--margin); }
+.tablewrap { overflow-x: auto; }
+table.t { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 15px; }
+table.t th, table.t td { text-align: left; padding: 6px 14px 6px 0; border-bottom: 1px solid var(--line); }
+table.t th { font-family: var(--f-mono); font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
+.fig { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.fig svg { width: 100%; max-width: 440px; height: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; }
+.fig figcaption { font-size: 13px; color: var(--muted); max-width: 62ch; }
+.fig .ax { stroke: var(--muted); stroke-width: 1.2; fill: none; }
+.fig .gr { stroke: var(--grid); stroke-width: 1; fill: none; }
+.fig .curve { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+.fig .hl { stroke: var(--ok); stroke-width: 6; stroke-linecap: round; fill: none; }
+.fig .lo { stroke: var(--bad); stroke-width: 6; stroke-linecap: round; fill: none; }
+.fig .tan { stroke: var(--margin); stroke-width: 2; fill: none; }
+.fig .miss { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.fig .dot { fill: var(--margin); }
+.fig .dot2 { fill: var(--ink); }
+.fig text { fill: var(--muted); font-family: var(--f-mono); font-size: 12px; }
+.fig text.lab { fill: var(--ink); }
+
+@media (max-width: 520px) {
+  .page { padding-left: 14px; gap: 32px; }
+  .task { grid-template-columns: 30px minmax(0, 1fr); gap: 4px 8px; }
+  .num { font-size: 30px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+.lesson { display: flex; flex-direction: column; gap: 14px; }
+.lesson h2 { margin-top: 6px; }
+.lesson h3 { font-family: var(--f-hand); font-size: 26px; margin: 8px 0 0; color: var(--accent); line-height: 1.1; }
+.lesson p, .lesson ul, .lesson ol { margin: 0; max-width: 64ch; }
+.lesson ul, .lesson ol { padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
+.part { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--margin); }
+.check { list-style: none; padding-left: 0 !important; }
+.check li::before { content: "☐ "; color: var(--accent); }
+.fig svg .box { fill: var(--field); stroke: var(--accent); stroke-width: 1.5; }
+.fig svg .box2 { fill: var(--chip); stroke: var(--line); stroke-width: 1; }
+.fig svg .lk { stroke: var(--muted); stroke-width: 1.2; fill: none; }
+.fig svg .pa { fill: var(--accent); }
+.fig svg text.big { fill: var(--ink); font-family: var(--f-body); font-size: 14px; font-weight: 600; }
+.fig svg text.sm2 { fill: var(--muted); font-family: var(--f-body); font-size: 11.5px; }
+textarea { font-size: 20px; min-height: 80px; }
+
+.fig svg .l1 { fill: var(--accent); fill-opacity: .10; stroke: var(--accent); stroke-width: 1; }
+.fig svg .l2 { fill: var(--accent); fill-opacity: .25; stroke: var(--accent); stroke-width: 1; }
+.fig svg .l3 { fill: var(--accent); fill-opacity: .45; stroke: var(--accent); stroke-width: 1; }
+.fig svg .crust { fill: none; stroke: var(--margin); stroke-width: 4; }
+.fig svg .green { fill: var(--ok); fill-opacity: .55; stroke: var(--ok); stroke-width: 1; }
+.fig svg .org { fill: var(--warn); fill-opacity: .35; stroke: var(--warn); stroke-width: 1; }
+.fig svg .wall { fill: none; stroke: var(--ok); stroke-width: 5; }
+.fig svg .mem { fill: var(--field); stroke: var(--ink); stroke-width: 1.4; }
+.fig svg .vac { fill: var(--accent); fill-opacity: .12; stroke: var(--accent); stroke-width: 1; }
+.fig svg .nuc { fill: var(--margin); fill-opacity: .18; stroke: var(--margin); stroke-width: 1.2; }
+.yt { font-size: 15px; color: var(--muted); }
+</style>
+
+<main class="page">
+  <header class="top">
+    <div class="eyebrow"><span>Biologie</span><span>Thema 1 von 6</span><span>Teil 1 von 3</span></div>
+    <h1>Die Zelle und ihre Organellen</h1>
+    <p class="lead">Erster Teil der Zellbiologie: Bauplan der Zelle, Organellen und ihre Aufgaben. Teil 2 (Membran und Transport) und Teil 3 (Mitose und Meiose) folgen an den nächsten Biologie-Tagen.</p>
+    <p class="note"><strong>Lernen:</strong> Die Organellen-Tabelle ist Auswendigstoff. Das Fabrik-Bild hilft, die Aufgaben logisch statt stur zu merken.</p>
+  </header>
+  <section class="lesson" aria-labelledby="b1">
+    <span class="part">Teil 1 von 3 · Zellbau · 2 h</span>
+    <h2 id="b1">Die Zelle und ihre Organellen</h2>
+    <p><strong>Worum es geht:</strong> Die Zelle ist die kleinste Einheit, die lebt. Alle Lebewesen bestehen aus Zellen, und jede Zelle entsteht aus einer anderen Zelle (Zelltheorie). Im Innern arbeiten spezialisierte Bauteile, die <em>Organellen</em>, wie Abteilungen einer Fabrik.</p>
+    <p><strong>Wozu:</strong> Stoffwechsel, Genetik, Humanbiologie und Evolution bauen alle darauf auf. Wer weiss, welches Organell was tut, versteht später Zellatmung, Proteinbiosynthese und Krankheiten.</p>
+    <p><strong>Wo gebraucht:</strong> Medizin (Antibiotika greifen Bakterienbau an), Biotechnologie, Krebsforschung.</p>
+
+    <h3>Zwei Grundbaupläne</h3>
+    <div class="tablewrap"><table class="t">
+      <thead><tr><th></th><th>Prokaryoten</th><th>Eukaryoten</th></tr></thead>
+      <tbody>
+        <tr><td>Wer</td><td>Bakterien (und Archaeen)</td><td>Tiere, Pflanzen, Pilze, Einzeller wie Amöben</td></tr>
+        <tr><td>Zellkern</td><td><strong>keiner</strong>, DNA liegt frei im Zytoplasma, dazu kleine Ringe (Plasmide)</td><td>DNA im <strong>Zellkern</strong> mit Kernhülle</td></tr>
+        <tr><td>Organellen mit Membran</td><td>keine</td><td>viele (Mitochondrien, ER, Golgi …)</td></tr>
+        <tr><td>Ribosomen</td><td>kleiner (70S)</td><td>grösser (80S)</td></tr>
+        <tr><td>Grösse</td><td>etwa 1–10 µm</td><td>etwa 10–100 µm</td></tr>
+      </tbody>
+    </table></div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 440 230" role="img" aria-label="Schema einer Tierzelle und einer Pflanzenzelle">
+        <ellipse class="mem" cx="105" cy="105" rx="92" ry="72"/>
+        <circle class="nuc" cx="95" cy="100" r="26"/><circle class="nuc" cx="100" cy="96" r="7"/>
+        <ellipse class="org" cx="150" cy="75" rx="16" ry="8"/><ellipse class="org" cx="155" cy="135" rx="16" ry="8"/><ellipse class="org" cx="45" cy="130" rx="14" ry="7"/>
+        <rect class="wall" x="240" y="25" width="180" height="160" rx="6"/>
+        <rect class="mem" x="247" y="32" width="166" height="146" rx="4"/>
+        <rect class="vac" x="290" y="55" width="110" height="105" rx="16"/>
+        <circle class="nuc" cx="268" cy="62" r="15"/>
+        <ellipse class="green" cx="262" cy="125" rx="9" ry="6"/><ellipse class="green" cx="268" cy="158" rx="9" ry="6"/><ellipse class="green" cx="320" cy="44" rx="9" ry="6"/><ellipse class="green" cx="380" cy="168" rx="9" ry="6"/>
+        <ellipse class="org" cx="262" cy="98" rx="10" ry="5"/>
+        <text x="95" y="104" text-anchor="middle">Kern</text>
+        <text x="150" y="62" text-anchor="middle">Mitochondrium</text>
+        <text x="345" y="112" text-anchor="middle">Vakuole</text>
+        <text x="380" y="200" text-anchor="middle">Zellwand</text>
+        <text x="300" y="200" text-anchor="middle">Chloroplast</text>
+        <text class="lab" x="105" y="200" text-anchor="middle">Tierzelle</text>
+        <text class="lab" x="330" y="222" text-anchor="middle">Pflanzenzelle</text>
+      </svg>
+      <figcaption>Nur die Pflanzenzelle hat Zellwand, grosse Vakuole und Chloroplasten. Mitochondrien haben beide.</figcaption>
+    </figure>
+
+    <h3>Organellen und ihre Aufgaben</h3>
+    <div class="tablewrap"><table class="t">
+      <thead><tr><th>Organell</th><th>Aufgabe</th><th>Bild aus der Fabrik</th></tr></thead>
+      <tbody>
+        <tr><td>Zellkern</td><td>speichert die DNA, steuert die Zelle</td><td>Chefbüro mit Bauplänen</td></tr>
+        <tr><td>Zellmembran</td><td>grenzt ab, kontrolliert den Stoffaustausch</td><td>Fabriktor mit Kontrolle</td></tr>
+        <tr><td>Zytoplasma</td><td>Grundflüssigkeit, in der alles liegt</td><td>Fabrikhalle</td></tr>
+        <tr><td>Ribosomen</td><td>bauen Proteine</td><td>Werkbänke</td></tr>
+        <tr><td>raues ER</td><td>Membrankanäle mit Ribosomen, Proteine für Export und Membran</td><td>Fertigungsstrasse</td></tr>
+        <tr><td>glattes ER</td><td>baut Lipide, entgiftet</td><td>Chemielabor</td></tr>
+        <tr><td>Golgi-Apparat</td><td>verändert, sortiert und verpackt Proteine in Vesikel</td><td>Versandabteilung</td></tr>
+        <tr><td>Mitochondrien</td><td>Zellatmung: Energie aus Glucose als ATP</td><td>Kraftwerk</td></tr>
+        <tr><td>Lysosomen</td><td>bauen Abfall und Fremdstoffe ab (v. a. Tierzelle)</td><td>Recycling</td></tr>
+        <tr><td>Chloroplasten</td><td>Fotosynthese (nur Pflanzen)</td><td>Solarkraftwerk</td></tr>
+        <tr><td>Vakuole</td><td>Zellsaft, Speicher, Innendruck (Turgor)</td><td>Lager und Wassertank</td></tr>
+        <tr><td>Zellwand</td><td>Cellulose, gibt Form und Stabilität (Pflanzen)</td><td>Aussenmauer</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Endosymbiontentheorie:</strong> Mitochondrien und Chloroplasten waren einst freilebende Bakterien, die von einer grösseren Zelle aufgenommen wurden. Belege: eigene ringförmige DNA, eigene 70S-Ribosomen wie Bakterien, Doppelmembran, sie teilen sich selbständig.</p>
+
+    <h3>Beispiele</h3>
+    <ol>
+      <li><strong>Muskelzelle:</strong> braucht viel Energie, darum besonders viele Mitochondrien.</li>
+      <li><strong>Weg eines Proteins, das die Zelle verlässt:</strong> Ribosom am rauen ER → Kanal des ER → Vesikel → Golgi-Apparat (verpacken) → Vesikel → Zellmembran → nach draussen.</li>
+      <li><strong>Welkende Pflanze:</strong> Die Vakuolen verlieren Wasser, der Innendruck (Turgor) sinkt, die Zellen werden schlaff.</li>
+    </ol>
+    <h3>Checkliste</h3>
+    <ul class="check">
+      <li>Kern vorhanden? → Eukaryot, sonst Prokaryot</li>
+      <li>Zellwand, grosse Vakuole, Chloroplasten? → Pflanzenzelle</li>
+      <li>Für jede Aufgabe der Zelle das zuständige Organell nennen können</li>
+      <li>Viel von einer Tätigkeit → viele der passenden Organellen</li>
+    </ul>
+  </section>
+
+  <section class="tasks" aria-label="Aufgaben">
+    <article class="task">
+      <div class="num">1</div>
+      <div class="body">
+        <div class="q"><p>Nenne drei Unterschiede zwischen Prokaryoten und Eukaryoten.</p></div>
+        <label class="ans" for="ans-1">Deine Antwort</label>
+        <textarea id="ans-1" data-n="1" rows="3"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">2</div>
+      <div class="body">
+        <div class="q"><p>Welche drei Bestandteile hat eine Pflanzenzelle, die einer Tierzelle fehlen? Wozu dient jeder?</p></div>
+        <label class="ans" for="ans-2">Deine Antwort</label>
+        <textarea id="ans-2" data-n="2" rows="3"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">3</div>
+      <div class="body">
+        <div class="q"><p>Welches Organell? a) Proteine herstellen b) ATP herstellen c) Proteine sortieren und verpacken d) Erbinformation speichern e) Abfallstoffe abbauen</p></div>
+        <label class="ans" for="ans-3">Deine Antwort</label>
+        <textarea id="ans-3" data-n="3" rows="3"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">4</div>
+      <div class="body">
+        <div class="q"><p>Zellen der Bauchspeicheldrüse stellen grosse Mengen Verdauungsenzyme (Proteine) für den Export her. Welche Organellen findest du dort besonders viele, und warum?</p></div>
+        <label class="ans" for="ans-4">Deine Antwort</label>
+        <textarea id="ans-4" data-n="4" rows="3"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">5</div>
+      <div class="body">
+        <div class="q"><p>Nenne zwei Belege dafür, dass Mitochondrien von Bakterien abstammen.</p></div>
+        <label class="ans" for="ans-5">Deine Antwort</label>
+        <textarea id="ans-5" data-n="5" rows="3"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">6</div>
+      <div class="body">
+        <div class="q"><p>Knacknuss: Eine Zelle aus einer Wurzel hat keine Chloroplasten. Woran erkennst du unter dem Mikroskop trotzdem, dass es eine Pflanzenzelle ist? Und warum braucht sie Mitochondrien?</p></div>
+        <label class="ans" for="ans-6">Deine Antwort</label>
+        <textarea id="ans-6" data-n="6" rows="3"></textarea>
+      </div>
+    </article>
+    <article class="task">
+      <div class="num">7</div>
+      <div class="body">
+        <div class="q"><p>Knacknuss: Ein Antibiotikum blockiert gezielt 70S-Ribosomen. Warum schadet es Bakterien, dem Menschen aber kaum? Wo im menschlichen Körper könnte es trotzdem eine Nebenwirkung geben?</p></div>
+        <label class="ans" for="ans-7">Deine Antwort</label>
+        <textarea id="ans-7" data-n="7" rows="4"></textarea>
+      </div>
+    </article>
+  </section>
+
+  <section class="panel" aria-labelledby="send-h">
+    <h2 id="send-h">Antworten abgeben</h2>
+    <p>Der Knopf kopiert alle Felder als Text. Füg ihn danach im Chat ein. Deine Eingaben bleiben in diesem Browser gespeichert.</p>
+    <div class="actions">
+      <button type="button" id="copy-btn">Alle Antworten kopieren</button>
+      <button type="button" class="ghost" id="clear-btn">Felder leeren</button>
+      <span class="status" id="status" role="status"></span>
+    </div>
+    <textarea id="copy-fallback" hidden readonly aria-label="Antworten zum Kopieren"></textarea>
+  </section>
+
+  <section class="panel solutions" aria-labelledby="sol-h">
+    <h2 id="sol-h">Lösungen und Erklärungen</h2>
+    <p>Kommen hierhin, sobald du mir deine Antworten im Chat geschickt hast.</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  var KEY = 'bio-01-zellbau-';
+  var fields = Array.prototype.slice.call(document.querySelectorAll('textarea[data-n]'));
+  var status = document.getElementById('status');
+
+  function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  fields.forEach(function (f) {
+    var v = load(KEY + f.dataset.n);
+    if (v) f.value = v;
+    f.addEventListener('input', function () { save(KEY + f.dataset.n, f.value); });
+  });
+
+  function compile() {
+    var lines = ['Biologie 1: Zellbau'];
+    fields.forEach(function (f) {
+      var v = f.value.trim().replace(/\s*\n\s*/g, ' / ');
+      lines.push(f.dataset.n + ': ' + (v || '(leer)'));
+    });
+    return lines.join('\n');
+  }
+
+  var fb = document.getElementById('copy-fallback');
+  document.getElementById('copy-btn').addEventListener('click', function () {
+    var text = compile();
+    function fallback() {
+      fb.hidden = false; fb.value = text; fb.focus(); fb.select();
+      status.textContent = 'Kopieren ging nicht automatisch. Der Text ist markiert, kopiere ihn von Hand.';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () {
+        fb.hidden = true;
+        status.textContent = 'Kopiert. Füg es im Chat ein.';
+      }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  var armed = false;
+  document.getElementById('clear-btn').addEventListener('click', function (ev) {
+    if (!armed) {
+      armed = true; ev.target.textContent = 'Wirklich leeren?';
+      setTimeout(function () { armed = false; ev.target.textContent = 'Felder leeren'; }, 3000);
+      return;
+    }
+    fields.forEach(function (f) { f.value = ''; save(KEY + f.dataset.n, ''); });
+    armed = false; ev.target.textContent = 'Felder leeren';
+    status.textContent = 'Alle Felder geleert.';
+  });
+
+})();
+</script>
